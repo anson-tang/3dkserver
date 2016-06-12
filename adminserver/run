@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Version: 0.1
+# Author: Don Li <donne.cn@gmail.com>
+# License: Copyright(c) 2012 Don.Li
+# Summary: 
+
+uwsgi -x ./adminserver_uwsgi.xml

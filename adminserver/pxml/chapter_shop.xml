@@ -1,0 +1,540 @@
+<chapter>
+    <title>商店相关协议</title>
+    <para>本章定义了所有商店相关的通信协议格式。</para>
+
+    <section>
+        <title>[old] 获取抽卡状态信息</title>
+        <para><informaltable>
+            <tgroup cols="5">
+            <colspec colnum="1" colname="1" />
+            <colspec colnum="2" colname="2" />
+            <colspec colnum="3" colname="3" />
+            <colspec colnum="4" colname="4" />
+            <colspec colnum="5" colname="5" />
+            <tbody>
+                <row>
+                    <entry>协议名称</entry><entry namest="2" nameend="5">获取抽卡状态信息 v0.3.3.2版本以前使用</entry>
+                </row>
+                <row>
+                    <entry>呼叫方</entry>
+                    <entry>应答方</entry>
+                    <entry>函数名</entry>
+                    <entry>请求参数说明</entry>
+                    <entry>返回值格式说明</entry>
+                </row>
+                <row>
+                    <entry>客户端</entry>
+                    <entry>网关服务器</entry>
+                    <entry>randcard_status</entry>
+                    <entry><informaltable>
+                        <tgroup cols="3">
+                            <colspec colnum="1" colname="1" />
+                            <colspec colnum="2" colname="2" />
+                            <colspec colnum="3" colname="3" />
+                            <tbody>
+                                <row><entry>参数</entry><entry>类型</entry><entry>说明</entry></row>
+                            </tbody>
+                        </tgroup>
+                    </informaltable></entry>
+                    <entry><informaltable>
+                        <tgroup cols="3">
+                            <colspec colnum="1" colname="1" />
+                            <colspec colnum="2" colname="2" />
+                            <colspec colnum="3" colname="3" />
+                            <tbody>
+                                <row><entry>参数</entry><entry>类型</entry><entry>说明</entry></row>
+                                <row>
+                                    <entry>result</entry>
+                                    <entry>uint</entry>
+                                    <entry>状态。
+                                        0：获取成功。
+                                        其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+                                </row>
+                                <row><entry>data</entry><entry>Array(blue_left_time, purple_left_time, purple_rand_count, user_item_num, purple_ten_cost)</entry><entry>抽卡状态信息，具体参数值如下：</entry></row>
+                                <row><entry>blue_left_time</entry><entry>int</entry><entry>-1表示没有抽过奖，0表示免费时间已到， >0表示剩余秒数后，才能免费抽取。</entry></row>
+                                <row><entry>purple_left_time</entry><entry>int</entry><entry>-1表示没有抽过奖，0表示免费时间已到， >0表示剩余秒数后，才能免费抽取。</entry></row>
+                                <row><entry>purple_rand_count</entry><entry>int</entry><entry>玩家在当前神坛等级中已抽取紫卡的次数。</entry></row>
+                                <row><entry>user_item_num</entry><entry>int</entry><entry>玩家拥有的招募令道具数量。</entry></row>
+                                <row><entry>purple_ten_cost</entry><entry>int</entry><entry>紫卡十连抽的价格。</entry></row>
+                            </tbody>
+                        </tgroup>
+                    </informaltable></entry>
+                </row>
+                <row>
+                    <entry>协议说明</entry><entry namest="2" nameend="5"></entry>
+                </row>
+            </tbody>
+            </tgroup>
+        </informaltable></para>
+    </section>
+
+    <section>
+        <title>[new] 获取抽卡状态信息</title>
+        <para><informaltable>
+            <tgroup cols="5">
+            <colspec colnum="1" colname="1" />
+            <colspec colnum="2" colname="2" />
+            <colspec colnum="3" colname="3" />
+            <colspec colnum="4" colname="4" />
+            <colspec colnum="5" colname="5" />
+            <tbody>
+                <row>
+                    <entry>协议名称</entry><entry namest="2" nameend="5">获取抽卡状态信息, 客户端版本v0.3.3.2以后版本使用</entry>
+                </row>
+                <row>
+                    <entry>呼叫方</entry>
+                    <entry>应答方</entry>
+                    <entry>函数名</entry>
+                    <entry>请求参数说明</entry>
+                    <entry>返回值格式说明</entry>
+                </row>
+                <row>
+                    <entry>客户端</entry>
+                    <entry>网关服务器</entry>
+                    <entry>randcard_status_new</entry>
+                    <entry><informaltable>
+                        <tgroup cols="3">
+                            <colspec colnum="1" colname="1" />
+                            <colspec colnum="2" colname="2" />
+                            <colspec colnum="3" colname="3" />
+                            <tbody>
+                                <row><entry>参数</entry><entry>类型</entry><entry>说明</entry></row>
+                            </tbody>
+                        </tgroup>
+                    </informaltable></entry>
+                    <entry><informaltable>
+                        <tgroup cols="3">
+                            <colspec colnum="1" colname="1" />
+                            <colspec colnum="2" colname="2" />
+                            <colspec colnum="3" colname="3" />
+                            <tbody>
+                                <row><entry>参数</entry><entry>类型</entry><entry>说明</entry></row>
+                                <row>
+                                    <entry>result</entry>
+                                    <entry>uint</entry>
+                                    <entry>状态。
+                                        0：获取成功。
+                                        其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+                                </row>
+                                <row><entry>data</entry><entry>Array(blue_left_time, purple_left_time, purple_rand_count, user_item_num, purple_ten_cost, camp_left_time, curr_camp_ids, next_camp_ids)</entry><entry>抽卡状态信息，具体参数值如下：</entry></row>
+                                <row><entry>blue_left_time</entry><entry>int</entry><entry>-1表示没有抽过奖，0表示免费时间已到， >0表示剩余秒数后，才能免费抽取。</entry></row>
+                                <row><entry>purple_left_time</entry><entry>int</entry><entry>-1表示没有抽过奖，0表示免费时间已到， >0表示剩余秒数后，才能免费抽取。</entry></row>
+                                <row><entry>purple_rand_count</entry><entry>int</entry><entry>玩家在当前神坛等级中已抽取紫卡的次数。</entry></row>
+                                <row><entry>user_item_num</entry><entry>int</entry><entry>玩家拥有的招募令道具数量。</entry></row>
+                                <row><entry>purple_ten_cost</entry><entry>int</entry><entry>紫卡十连抽的价格。</entry></row>
+                                <row><entry>camp_left_time</entry><entry>int</entry><entry>剩余秒数后，会切换抽卡阵营。</entry></row>
+                                <row><entry>curr_camp_ids</entry><entry>Array(Array(camp_id, rand_count), Array(camp_id, rand_count))</entry><entry>camp_id:当前的抽卡阵营ID。rand_count:当前阵营ID池中已抽卡的次数。</entry></row>
+                                <row><entry>next_camp_ids</entry><entry>Array(Array(camp_id, rand_count), Array(camp_id, rand_count))</entry><entry>camp_id:即将开放的抽卡阵营ID。rand_count:次数为0。</entry></row>
+                            </tbody>
+                        </tgroup>
+                    </informaltable></entry>
+                </row>
+                <row>
+                    <entry>协议说明</entry><entry namest="2" nameend="5"></entry>
+                </row>
+            </tbody>
+            </tgroup>
+        </informaltable></para>
+    </section>
+
+    <section>
+        <title>抽卡</title>
+        <para><informaltable>
+            <tgroup cols="5">
+            <colspec colnum="1" colname="1" />
+            <colspec colnum="2" colname="2" />
+            <colspec colnum="3" colname="3" />
+            <colspec colnum="4" colname="4" />
+            <colspec colnum="5" colname="5" />
+            <tbody>
+                <row>
+                    <entry>协议名称</entry><entry namest="2" nameend="5">抽卡</entry>
+                </row>
+                <row>
+                    <entry>呼叫方</entry>
+                    <entry>应答方</entry>
+                    <entry>函数名</entry>
+                    <entry>请求参数说明</entry>
+                    <entry>返回值格式说明</entry>
+                </row>
+                <row>
+                    <entry>客户端</entry>
+                    <entry>网关服务器</entry>
+                    <entry>randcard</entry>
+                    <entry><informaltable>
+                        <tgroup cols="3">
+                            <colspec colnum="1" colname="1" />
+                            <colspec colnum="2" colname="2" />
+                            <colspec colnum="3" colname="3" />
+                            <tbody>
+                                <row><entry>参数</entry><entry>类型</entry><entry>说明</entry></row>
+                                <row><entry>card_type</entry><entry>uint</entry><entry>1:绿色，2：蓝色，3：紫色</entry></row>
+                                <row><entry>rand_times</entry><entry>uint</entry><entry>1:只抽一次， 10：连抽10次。</entry></row>
+                            </tbody>
+                        </tgroup>
+                    </informaltable></entry>
+                    <entry><informaltable>
+                        <tgroup cols="3">
+                            <colspec colnum="1" colname="1" />
+                            <colspec colnum="2" colname="2" />
+                            <colspec colnum="3" colname="3" />
+                            <tbody>
+                                <row><entry>参数</entry><entry>类型</entry><entry>说明</entry></row>
+                                <row>
+                                    <entry>result</entry>
+                                    <entry>uint</entry>
+                                    <entry>状态。
+                                        0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+                                </row>
+                                <row><entry>data</entry><entry>Array(credits, fellow_id_list, blue_left_time, purple_left_time, purple_rand_count, item_num, left_items)</entry><entry>玩家剩余点卷数和抽到的伙伴ID列表。具体参数解释如下：</entry></row>
+                                <row><entry>credits</entry><entry>uint</entry><entry>玩家剩余的点卷数。</entry></row>
+                                <row><entry>fellow_id_list</entry><entry>Array(Array(user_fellow_id, fellow_id), ...)</entry><entry>user_fellow_id: 玩家伙伴ID，内部唯一，查询或删除时用。fellow_id, uint, 伙伴ID. 具体属性见sysconfig['fellow']。</entry></row>
+                                <row><entry>blue_left_time</entry><entry>int</entry><entry>-1表示没有抽过奖，0表示免费时间已到， >0表示剩余秒数后，才能免费抽取。</entry></row>
+                                <row><entry>purple_left_time</entry><entry>int</entry><entry>-1表示没有抽过奖，0表示免费时间已到， >0表示剩余秒数后，才能免费抽取。</entry></row>
+                                <row><entry>purple_rand_count</entry><entry>int</entry><entry>玩家在当前神坛等级中已抽取紫卡的次数。</entry></row>
+                                <row><entry>item_num</entry><entry>int</entry><entry>玩家拥有的招募令道具数量。</entry></row>
+                                <row><entry>left_items</entry><entry>Array(Array(user_item_id, item_type, item_id, quatity), ...)</entry><entry>抽卡后玩家的道具信息。</entry></row>
+                                <row><entry>user_item_id</entry><entry>uint</entry><entry>玩家道具ID。</entry></row>
+                                <row><entry>item_type</entry><entry>uint</entry><entry>道具类型。</entry></row>
+                                <row><entry>item_id</entry><entry>uint</entry><entry>道具ID。</entry></row>
+                                <row><entry>quantity</entry><entry>uint</entry><entry>道具剩余的数量。为0时需要client从背包中删除此道具</entry></row>
+                            </tbody>
+                        </tgroup>
+                    </informaltable></entry>
+                </row>
+                <row>
+                    <entry>协议说明</entry><entry namest="2" nameend="5"></entry>
+                </row>
+            </tbody>
+            </tgroup>
+        </informaltable></para>
+    </section>
+
+    <section>
+        <title>阵营抽卡</title>
+        <para><informaltable>
+            <tgroup cols="5">
+            <colspec colnum="1" colname="1" />
+            <colspec colnum="2" colname="2" />
+            <colspec colnum="3" colname="3" />
+            <colspec colnum="4" colname="4" />
+            <colspec colnum="5" colname="5" />
+            <tbody>
+                <row>
+                    <entry>协议名称</entry><entry namest="2" nameend="5">阵营抽卡</entry>
+                </row>
+                <row>
+                    <entry>呼叫方</entry>
+                    <entry>应答方</entry>
+                    <entry>函数名</entry>
+                    <entry>请求参数说明</entry>
+                    <entry>返回值格式说明</entry>
+                </row>
+                <row>
+                    <entry>客户端</entry>
+                    <entry>网关服务器</entry>
+                    <entry>camp_randcard</entry>
+                    <entry><informaltable>
+                        <tgroup cols="3">
+                            <colspec colnum="1" colname="1" />
+                            <colspec colnum="2" colname="2" />
+                            <colspec colnum="3" colname="3" />
+                            <tbody>
+                                <row><entry>参数</entry><entry>类型</entry><entry>说明</entry></row>
+                                <row><entry>camp_id</entry><entry>uint</entry><entry>1魏，2蜀，3吴，4群，5妖，6仙</entry></row>
+                            </tbody>
+                        </tgroup>
+                    </informaltable></entry>
+                    <entry><informaltable>
+                        <tgroup cols="3">
+                            <colspec colnum="1" colname="1" />
+                            <colspec colnum="2" colname="2" />
+                            <colspec colnum="3" colname="3" />
+                            <tbody>
+                                <row><entry>参数</entry><entry>类型</entry><entry>说明</entry></row>
+                                <row>
+                                    <entry>result</entry>
+                                    <entry>uint</entry>
+                                    <entry>状态。
+                                        0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+                                </row>
+                                <row><entry>data</entry><entry>Array(credits, rand_count, fellow_ids)</entry><entry>玩家剩余点卷数和抽到的伙伴ID列表。具体参数解释如下：</entry></row>
+                                <row><entry>credits</entry><entry>uint</entry><entry>玩家剩余的点卷数。</entry></row>
+                                <row><entry>rand_count</entry><entry>int</entry><entry>当前阵营ID池中已抽卡的次数。</entry></row>
+                                <row><entry>fellow_ids</entry><entry>Array(user_fellow_id, fellow_id)</entry><entry>新增的伙伴信息。user_fellow_id: 玩家伙伴ID，内部唯一，查询或删除时用。fellow_id, uint, 伙伴ID. 具体属性见sysconfig['fellow']。</entry></row>
+                            </tbody>
+                        </tgroup>
+                    </informaltable></entry>
+                </row>
+                <row>
+                    <entry>协议说明</entry><entry namest="2" nameend="5"></entry>
+                </row>
+            </tbody>
+            </tgroup>
+        </informaltable></para>
+    </section>
+
+    <section>
+        <title>获取已购买的道具信息</title>
+        <para><informaltable>
+            <tgroup cols="5">
+            <colspec colnum="1" colname="1" />
+            <colspec colnum="2" colname="2" />
+            <colspec colnum="3" colname="3" />
+            <colspec colnum="4" colname="4" />
+            <colspec colnum="5" colname="5" />
+            <tbody>
+                <row>
+                    <entry>协议名称</entry><entry namest="2" nameend="5">每日获取已购买的道具信息</entry>
+                </row>
+                <row>
+                    <entry>呼叫方</entry>
+                    <entry>应答方</entry>
+                    <entry>函数名</entry>
+                    <entry>请求参数说明</entry>
+                    <entry>返回值格式说明</entry>
+                </row>
+                <row>
+                    <entry>客户端</entry>
+                    <entry>网关服务器</entry>
+                    <entry>buyed_shop_item</entry>
+                    <entry><informaltable>
+                        <tgroup cols="3">
+                            <colspec colnum="1" colname="1" />
+                            <colspec colnum="2" colname="2" />
+                            <colspec colnum="3" colname="3" />
+                            <tbody>
+                                <row><entry>参数</entry><entry>类型</entry><entry>说明</entry></row>
+                            </tbody>
+                        </tgroup>
+                    </informaltable></entry>
+                    <entry><informaltable>
+                        <tgroup cols="3">
+                            <colspec colnum="1" colname="1" />
+                            <colspec colnum="2" colname="2" />
+                            <colspec colnum="3" colname="3" />
+                            <tbody>
+                                <row><entry>参数</entry><entry>类型</entry><entry>说明</entry></row>
+                                <row>
+                                    <entry>result</entry>
+                                    <entry>uint</entry>
+                                    <entry>状态。
+                                        0：获取成功。
+                                        其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+                                </row>
+                                <row><entry>data</entry><entry>Array(Array(shop_item_id, buyed_count), ...)</entry><entry>已购买的道具信息，具体参数值如下：</entry></row>
+                                <row><entry>shop_item_id</entry><entry>uint</entry><entry>商城中的道具ID。</entry></row>
+                                <row><entry>buyed_count</entry><entry>uint</entry><entry>当日此道具已购买的数量。</entry></row>
+                            </tbody>
+                        </tgroup>
+                    </informaltable></entry>
+                </row>
+                <row>
+                    <entry>协议说明</entry><entry namest="2" nameend="5"></entry>
+                </row>
+            </tbody>
+            </tgroup>
+        </informaltable></para>
+    </section>
+
+    <section>
+        <title>道具购买</title>
+        <para><informaltable>
+            <tgroup cols="5">
+            <colspec colnum="1" colname="1" />
+            <colspec colnum="2" colname="2" />
+            <colspec colnum="3" colname="3" />
+            <colspec colnum="4" colname="4" />
+            <colspec colnum="5" colname="5" />
+            <tbody>
+                <row>
+                    <entry>协议名称</entry><entry namest="2" nameend="5">道具购买</entry>
+                </row>
+                <row>
+                    <entry>呼叫方</entry>
+                    <entry>应答方</entry>
+                    <entry>函数名</entry>
+                    <entry>请求参数说明</entry>
+                    <entry>返回值格式说明</entry>
+                </row>
+                <row>
+                    <entry>客户端</entry>
+                    <entry>网关服务器</entry>
+                    <entry>buy_shop_item</entry>
+                    <entry><informaltable>
+                        <tgroup cols="3">
+                            <colspec colnum="1" colname="1" />
+                            <colspec colnum="2" colname="2" />
+                            <colspec colnum="3" colname="3" />
+                            <tbody>
+                                <row><entry>参数</entry><entry>类型</entry><entry>说明</entry></row>
+                                <row><entry>shop_item_id</entry><entry>uint</entry><entry>商城商品ID。</entry></row>
+                                <row><entry>quantity</entry><entry>uint</entry><entry>商品数量。</entry></row>
+                            </tbody>
+                        </tgroup>
+                    </informaltable></entry>
+                    <entry><informaltable>
+                        <tgroup cols="3">
+                            <colspec colnum="1" colname="1" />
+                            <colspec colnum="2" colname="2" />
+                            <colspec colnum="3" colname="3" />
+                            <tbody>
+                                <row><entry>参数</entry><entry>类型</entry><entry>说明</entry></row>
+                                <row>
+                                    <entry>result</entry>
+                                    <entry>uint</entry>
+                                    <entry>状态。
+                                        0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+                                </row>
+                                <row><entry>data</entry><entry>Array(shop_item_id, buyed_count, credits, add_items)</entry><entry>具体参数解释如下：</entry></row>
+                                <row><entry>shop_item_id</entry><entry>int</entry><entry>商城商品ID。</entry></row>
+                                <row><entry>buyed_count</entry><entry>uint</entry><entry>当日此道具已购买的数量。</entry></row>
+                                <row><entry>credits</entry><entry>uint</entry><entry>玩家剩余的点卷数。</entry></row>
+								<row><entry>add_items</entry><entry>Array( Array(user_item_id, item_type, item_id, quantity), ...)</entry><entry>购买的道具列表, 具体参数值如下：</entry></row>
+								<row><entry>user_item_id</entry><entry>uint</entry><entry>玩家道具ID。item_type=1, 货币时user_item_id为0。</entry></row>
+								<row><entry>item_type</entry><entry>uint</entry><entry>道具类型, 含金币等</entry></row>
+								<row><entry>item_id</entry><entry>uint</entry><entry>道具ID</entry></row>
+								<row><entry>quantity</entry><entry>uint</entry><entry>道具数量</entry></row>
+                            </tbody>
+                        </tgroup>
+                    </informaltable></entry>
+                </row>
+                <row>
+                    <entry>协议说明</entry><entry namest="2" nameend="5"></entry>
+                </row>
+            </tbody>
+            </tgroup>
+        </informaltable></para>
+    </section>
+
+    <section>
+        <title>获取已购买的VIP礼包信息</title>
+        <para><informaltable>
+            <tgroup cols="5">
+            <colspec colnum="1" colname="1" />
+            <colspec colnum="2" colname="2" />
+            <colspec colnum="3" colname="3" />
+            <colspec colnum="4" colname="4" />
+            <colspec colnum="5" colname="5" />
+            <tbody>
+                <row>
+                    <entry>协议名称</entry><entry namest="2" nameend="5">获取已购买的VIP礼包信息</entry>
+                </row>
+                <row>
+                    <entry>呼叫方</entry>
+                    <entry>应答方</entry>
+                    <entry>函数名</entry>
+                    <entry>请求参数说明</entry>
+                    <entry>返回值格式说明</entry>
+                </row>
+                <row>
+                    <entry>客户端</entry>
+                    <entry>网关服务器</entry>
+                    <entry>buyed_vip_package</entry>
+                    <entry><informaltable>
+                        <tgroup cols="3">
+                            <colspec colnum="1" colname="1" />
+                            <colspec colnum="2" colname="2" />
+                            <colspec colnum="3" colname="3" />
+                            <tbody>
+                                <row><entry>参数</entry><entry>类型</entry><entry>说明</entry></row>
+                            </tbody>
+                        </tgroup>
+                    </informaltable></entry>
+                    <entry><informaltable>
+                        <tgroup cols="3">
+                            <colspec colnum="1" colname="1" />
+                            <colspec colnum="2" colname="2" />
+                            <colspec colnum="3" colname="3" />
+                            <tbody>
+                                <row><entry>参数</entry><entry>类型</entry><entry>说明</entry></row>
+                                <row>
+                                    <entry>result</entry>
+                                    <entry>uint</entry>
+                                    <entry>状态。
+                                        0：获取成功。
+                                        其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+                                </row>
+                                <row><entry>data</entry><entry>Array(vip_level, ...)</entry><entry>已购买的vip等级礼包，具体参数值如下：</entry></row>
+                                <row><entry>vip_level</entry><entry>uint</entry><entry>vip等级。</entry></row>
+                            </tbody>
+                        </tgroup>
+                    </informaltable></entry>
+                </row>
+                <row>
+                    <entry>协议说明</entry><entry namest="2" nameend="5"></entry>
+                </row>
+            </tbody>
+            </tgroup>
+        </informaltable></para>
+    </section>
+
+    <section>
+        <title>VIP礼包购买</title>
+        <para><informaltable>
+            <tgroup cols="5">
+            <colspec colnum="1" colname="1" />
+            <colspec colnum="2" colname="2" />
+            <colspec colnum="3" colname="3" />
+            <colspec colnum="4" colname="4" />
+            <colspec colnum="5" colname="5" />
+            <tbody>
+                <row>
+                    <entry>协议名称</entry><entry namest="2" nameend="5">VIP礼包购买</entry>
+                </row>
+                <row>
+                    <entry>呼叫方</entry>
+                    <entry>应答方</entry>
+                    <entry>函数名</entry>
+                    <entry>请求参数说明</entry>
+                    <entry>返回值格式说明</entry>
+                </row>
+                <row>
+                    <entry>客户端</entry>
+                    <entry>网关服务器</entry>
+                    <entry>buy_vip_package</entry>
+                    <entry><informaltable>
+                        <tgroup cols="3">
+                            <colspec colnum="1" colname="1" />
+                            <colspec colnum="2" colname="2" />
+                            <colspec colnum="3" colname="3" />
+                            <tbody>
+                                <row><entry>参数</entry><entry>类型</entry><entry>说明</entry></row>
+                                <row><entry>vip_level</entry><entry>uint</entry><entry>VIP等级。</entry></row>
+                            </tbody>
+                        </tgroup>
+                    </informaltable></entry>
+                    <entry><informaltable>
+                        <tgroup cols="3">
+                            <colspec colnum="1" colname="1" />
+                            <colspec colnum="2" colname="2" />
+                            <colspec colnum="3" colname="3" />
+                            <tbody>
+                                <row><entry>参数</entry><entry>类型</entry><entry>说明</entry></row>
+                                <row>
+                                    <entry>result</entry>
+                                    <entry>uint</entry>
+                                    <entry>状态。
+                                        0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+                                </row>
+                                <row><entry>data</entry><entry>Array(vip_level, credits, add_items)</entry><entry>购买VIP礼包成功。具体参数解释如下：</entry></row>
+                                <row><entry>vip_level</entry><entry>int</entry><entry>VIP等级。</entry></row>
+                                <row><entry>credits</entry><entry>uint</entry><entry>玩家剩余的点卷数。</entry></row>
+								<row><entry>add_items</entry><entry>Array( Array(user_item_id, item_type, item_id, quantity), ...)</entry><entry>购买成功后进入背包的道具信息, 具体参数值如下：</entry></row>
+								<row><entry>user_item_id</entry><entry>uint</entry><entry>玩家道具ID。item_type=1, 货币时user_item_id为0。</entry></row>
+								<row><entry>item_type</entry><entry>uint</entry><entry>道具类型, 含金币等</entry></row>
+								<row><entry>item_id</entry><entry>uint</entry><entry>道具ID</entry></row>
+								<row><entry>quantity</entry><entry>uint</entry><entry>道具数量</entry></row>
+                            </tbody>
+                        </tgroup>
+                    </informaltable></entry>
+                </row>
+                <row>
+                    <entry>协议说明</entry><entry namest="2" nameend="5"></entry>
+                </row>
+            </tbody>
+            </tgroup>
+        </informaltable></para>
+    </section>
+
+</chapter>

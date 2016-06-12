@@ -1,0 +1,40 @@
+body {
+    font-family: verdana, tohoma, helvetica, arial, sans-serif;
+    text-align: left;
+    background: #FFF;
+    color: #222;
+    margin: lem;
+    padding: 0px;
+    font-size: 12px;
+    line-height: 1.4em
+}
+
+div.navheader {
+    border-bottom: 1px solid #DBDDEC;
+}
+
+div.navfooter {
+    border-top: 1px solid #DBDDEC;
+}
+
+.command { color: red; }
+
+div.navheader, div.navfooter {
+    background: #ECEDEF;
+    margin: 0;
+    padding: 0.1em .5em;
+}
+
+.informaltable table {
+    /* border: solid 1px #999; */
+    border-collapse: collapse;
+    border-spacing: 2px;
+    border-left: 2px solid #888;
+}
+
+.informaltable table tr td {
+    border-right:1px solid #888;
+    border-bottom:1px solid #888;
+    padding: 1px 8px;
+    text-align: left;
+}

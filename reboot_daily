@@ -1,0 +1,4 @@
+#!/bin/bash
+
+/usr/local/bin/fab -f ~likai/3d3k/Program/dailybuild/fabfile.py reboot
+

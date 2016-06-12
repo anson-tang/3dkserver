@@ -1,0 +1,17 @@
+<uwsgi>
+    <master/>
+    <memory />
+    <socket>127.0.0.1:8794</socket>
+    <chdir>./</chdir>
+    <python-path>./</python-path>
+    <module>main</module>
+    <limit-as>512MB</limit-as>
+    <processes>2</processes>
+    <pidfile>pid/adminserver_uwsgi.pid</pidfile>
+    <enable-threads>true</enable-threads>
+    <pep3333-input/>
+    <post-buffering>4096</post-buffering>
+    <buffer-size>32768</buffer-size>
+    <daemonize>logs/adminserver_uwsgi.log</daemonize>
+    <max-requests>10000</max-requests>
+</uwsgi>

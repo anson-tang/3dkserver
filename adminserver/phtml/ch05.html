@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>第 5 章 阵容相关协议</title><link rel="stylesheet" type="text/css" href="docbook.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.html" title="3DK 通信协议说明文档" /><link rel="up" href="index.html" title="3DK 通信协议说明文档" /><link rel="prev" href="ch04s10.html" title="4.10. [解救天神] 领取二郎神" /><link rel="next" href="ch05s02.html" title="5.2. 设置阵容中的伙伴" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">第 5 章 阵容相关协议</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch04s10.html">上一页</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch05s02.html">下一页</a></td></tr></table><hr /></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a id="idp59208304"></a>第 5 章 阵容相关协议</h1></div></div></div><div class="toc"><p><strong>目录</strong></p><dl class="toc"><dt><span class="section"><a href="ch05.html#get_camp">5.1. 获取玩家阵容信息</a></span></dt><dt><span class="section"><a href="ch05s02.html">5.2. 设置阵容中的伙伴</a></span></dt><dt><span class="section"><a href="ch05s03.html">5.3. 设置阵容中的装备</a></span></dt><dt><span class="section"><a href="ch05s04.html">5.4. 设置阵容中的宝物</a></span></dt><dt><span class="section"><a href="ch05s05.html">5.5. 阵容的一键装备</a></span></dt><dt><span class="section"><a href="ch05s06.html">5.6. 设置阵容中的专属小伙伴</a></span></dt><dt><span class="section"><a href="ch05s07.html">5.7. 设置阵容中的魂玉</a></span></dt><dt><span class="section"><a href="ch05s08.html">5.8. 阵容的一键魂玉</a></span></dt></dl></div><p>本章定义了玩家所有阵容相关的协议</p><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="get_camp"></a>5.1. 获取玩家阵容信息</h2></div></div></div><div class="informaltable"><table border="1"><colgroup><col class="1" /><col class="2" /><col class="3" /><col class="4" /><col class="5" /></colgroup><tbody><tr><td>协议名称</td><td colspan="4">获取玩家的阵容信息</td></tr><tr><td>呼叫方</td><td>应答方</td><td>函数名</td><td>请求参数说明</td><td>返回值格式说明</td></tr><tr><td>客户端</td><td>网关服务器</td><td>get_player_camp</td><td><div class="informaltable"><table border="1"><colgroup><col class="1" /><col class="2" /><col class="3" /></colgroup><tbody><tr><td>参数</td><td>类型</td><td>说明</td></tr><tr><td>cid</td><td>uint</td><td>玩家ID。</td></tr></tbody></table></div></td><td><div class="informaltable"><table border="1"><colgroup><col class="1" /><col class="2" /><col class="3" /></colgroup><tbody><tr><td>参数</td><td>类型</td><td>说明</td></tr><tr><td>result</td><td>uint</td><td>状态。0：获取成功。其它见<a class="link" href="ch29.html#errorlist" title="29.1. 错误代码列表">错误代码列表</a>.</td></tr><tr><td>data</td><td><div class="literallayout"><p><br />
+Array(all, Array(camp_data, ...), <br />
+           predestine_data, <br />
+           fellow_formation, <br />
+           chaos_level, <br />
+           Array(camp_jade_data, ...))</p></div></td><td><div class="literallayout"><p>阵容列表信息，数组的下标即阵容中的位置ID。<br />
+位置ID: 1-伙伴, 2-头盔 3-武器, 4-项链, 5-护甲, 6-兵书, 7-战马。<br />
+具体参数值如下。</p></div></td></tr><tr><td>all</td><td>uint</td><td>玩家当前阵容总数。</td></tr><tr><td>camp_data</td><td>Array</td><td><div class="literallayout"><p>玩家的阵容详细信息。<br />
+Array(camp_id, Array(user_fellow_id, fellow_id, level, advanced_level), <br />
+        Array(user_helmet_id, item_id, helmet_level, refine_attribute), <br />
+        Array(user_weapon_id, item_id, weapeon_level, refine_attribute), <br />
+        Array(user_necklace_id, item_id, necklace_level, refine_attribute), <br />
+        Array(user_armor_id, item_id, armor_level, refine_attribute), <br />
+        Array(user_bookwar_id, item_id, bookwar_level, refine_level), <br />
+        Array(user_horse_id, item_id, horse_level, refine_level)<br />
+     )<br />
+注：<br />
+当获取其他玩家阵容信息时, 装备洗炼属性、玩家阵型、玩家的混沌等级用于PVP战斗计算;<br />
+当camp_id=1, 主角时, fellow_id值为lead_id。<br />
+装备洗炼属性refine_attribute=Array(Array(attribute_id, attribute_value, max_value), ...)<br />
+</p></div></td></tr><tr><td>predestine_data</td><td>Array(user_fellow_id/fellow_id, ...)</td><td>阵容中的专属小伙伴, 可和上阵武将配羁绊。数组的下标即阵容羁绊的位置ID, 依次解锁。查看别人的阵容时返回fellow_id列表。</td></tr><tr><td>fellow_formation</td><td>Array(fellow_id, ...)</td><td>玩家的阵型</td></tr><tr><td>chaos_level</td><td>uint</td><td>玩家的混沌等级</td></tr><tr><td>camp_jade_data</td><td>Array</td><td><div class="literallayout"><p>玩家的魂玉阵容详细信息。<br />
+Array(camp_id, Array(user_jade_id, jade_id, level),<br />
+               ... <br />
+               ...<br />
+)<br />
+注: 客户端根据 camp_id 获取该阵容中装备的玉魄信息。<br />
+</p></div></td></tr></tbody></table></div></td></tr><tr><td>协议说明</td><td colspan="4"> </td></tr></tbody></table></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch04s10.html">上一页</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ch05s02.html">下一页</a></td></tr><tr><td width="40%" align="left" valign="top">4.10. [解救天神]  领取二郎神 </td><td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td><td width="40%" align="right" valign="top"> 5.2. 设置阵容中的伙伴</td></tr></table></div></body></html>

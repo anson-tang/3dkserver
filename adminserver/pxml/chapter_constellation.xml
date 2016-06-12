@@ -1,0 +1,686 @@
+<chapter>
+
+    <title>观星相关协议</title>
+    <para>本章定义了所有观星相关的通信协议格式</para>
+
+	<section>
+        <title>观星当前状态(过0点请刷新)</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">观星当前状态(过0点请刷新)</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>网关服务器</entry>
+							<entry>constellation_status</entry>
+							<entry>
+                                <!--
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+                                -->
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+                                            <row>
+                                                <entry>data</entry>
+                                                <entry>Array(stars_for_hit, stars_for_select, score, selected, free, hitted)</entry>
+                                                <entry>玩家当前的天外天数值。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>stars_for_hit</entry>
+                                                <entry>Array(Array(star_id, hitted), Array(star_id, hitted), Array(star_id, hitted), Array(star_id, hitted))</entry>
+                                                <entry>待点亮的星座ID，共4个，ID内部唯一。hitted为1时，表示已被点亮，0表示未点亮。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>stars_for_select</entry>
+                                                <entry>Array(star_id, star_id, star_id, star_id, star_id)</entry>
+                                                <entry>已抽取的星座ID，共5个，ID内部唯一。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>score</entry>
+                                                <entry>uint</entry>
+                                                <entry>24点前，当日已获得星数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>selected</entry>
+                                                <entry>uint</entry>
+                                                <entry>24点前，当日已观星次数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>free</entry>
+                                                <entry>uint</entry>
+                                                <entry>24点前，当日剩余刷新次数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>hitted</entry>
+                                                <entry>uint</entry>
+                                                <entry>24点前，当日已額外加星次数。</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+	<section>
+        <title>观星</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">观星</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>网关服务器</entry>
+							<entry>constellation_select</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+                                            <row>
+                                                <entry>star_id</entry>
+                                                <entry>uint</entry>
+                                                <entry>选中了的星座ID。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>is_highlight</entry>
+                                                <entry>int</entry>
+                                                <entry>该星座ID是否为高亮，0：未亮。1：已亮。</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功, 124:星座数据和服务器不同步，需要更新。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+                                            <row>
+                                                <entry>data</entry>
+                                                <entry>Array(stars_for_hit, stars_for_select, score, selected, hitted)</entry>
+                                                <entry>玩家购买后的信息。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>stars_for_hit</entry>
+                                                <entry>Array(Array(star_id, hitted), Array(star_id, hitted), Array(star_id, hitted), Array(star_id, hitted))</entry>
+                                                <entry>待点亮的星座ID，共4个，ID内部唯一。hitted为1时，表示已被点亮，0表示未点亮。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>stars_for_select</entry>
+                                                <entry>Array(star_id, star_id, star_id, star_id, star_id)</entry>
+                                                <entry>已抽取的星座ID，共5个，ID内部唯一。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>score</entry>
+                                                <entry>uint</entry>
+                                                <entry>24点前，当日已获得星数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>selected</entry>
+                                                <entry>uint</entry>
+                                                <entry>24点前，当日已观星次数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>hitted</entry>
+                                                <entry>uint</entry>
+                                                <entry>24点前，当日已額外加星次数。</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+	<section>
+        <title>刷新已抽取星座</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">刷新已抽取星座</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>网关服务器</entry>
+							<entry>constellation_refresh</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>use_item</entry>
+												<entry>uint</entry>
+												<entry>0:直接消耗钻石，1：使用观星令, 每次使用一个。注：当玩家有免费次数时，该参数不生效。</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+											<row>
+												<entry>data</entry>
+												<entry>Array(stars_for_select, free, credits, item_data)</entry>
+												<entry>刷新成功后，同步到客户端的数据，格式如下：</entry>
+											</row>
+                                            <row>
+                                                <entry>stars_for_select</entry>
+                                                <entry>Array(star_id, star_id, star_id, star_id, star_id)</entry>
+                                                <entry>已抽取的星座ID，共5个，ID内部唯一。</entry>
+                                            </row>
+											<row>
+												<entry>free</entry>
+												<entry>uint</entry>
+                                                <entry>24点前，当日剩余刷新次数。</entry>
+											</row>
+											<row>
+												<entry>credits</entry>
+												<entry>uint</entry>
+                                                <entry>玩家当前剩余钻石数。</entry>
+											</row>
+											<row>
+												<entry>item_data</entry>
+												<entry>Array(user_item_id, item_id, quantity, item_type)</entry>
+                                                <entry>玩家当前剩余观星令的信息。</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+	<section>
+        <title>查看当日观星奖励</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">查看当日观星奖励</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>网关服务器</entry>
+							<entry>constellation_reward_status</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+                                            <row>
+                                                <entry>data</entry>
+                                                <entry>Array(reward_content, ...)</entry>
+                                                <entry>当日可领的10份奖品， 领取条件参见sysconfig. reward_content格式如下:</entry>
+                                            </row>
+                                            <row>
+                                                <entry>reward_content</entry>
+                                                <entry>Array(type, id, quantity, received)</entry>
+                                                <entry>奖品格式。type:奖励类型。 id: 当type为道具时， 为item_id. quantity:奖励数量, received:已领取。</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+	<section>
+		<title>刷新观星奖励</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">刷新观星奖励</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>网关服务器</entry>
+							<entry>constellation_reward_refresh</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+                                            <row>
+                                                <entry>data</entry>
+                                                <entry>Array(credits, Array(reward_content, ...))</entry>
+                                                <entry>当日可领的10份奖品， 领取条件参见sysconfig. reward_content格式如下:</entry>
+                                            </row>
+                                            <row>
+                                                <entry>credits</entry>
+                                                <entry>uint</entry>
+                                                <entry>玩家当前剩余钻石数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>reward_content</entry>
+                                                <entry>Array(type, id, quantity, received)</entry>
+                                                <entry>奖品格式。type:奖励类型。 id: 当type为道具时， 为item_id. quantity:奖励数量, received:已领取。</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+	<section>
+		<title>领取观星奖励</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">领取观星奖励</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>网关服务器</entry>
+							<entry>constellation_reward_receive</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+                                            <row>
+                                                <entry>data</entry>
+                                                <entry>Array(Array(reward_content, ...), add_items)</entry>
+                                                <entry>当日可领的10份奖品， 领取条件参见sysconfig. reward_content和add_items格式如下:</entry>
+                                            </row>
+                                            <row>
+                                                <entry>reward_content</entry>
+                                                <entry>Array(type, id, quantity, received)</entry>
+                                                <entry>奖品格式。type:奖励类型。 id: 当type为道具时， 为item_id. quantity:奖励数量, received:已领取。</entry>
+                                            </row>
+											<row>
+												<entry>add_items</entry>
+                                                <entry>Array(Array(user_item_id, item_type, item_id, quantity), ...)</entry>
+												<entry>玩家背包新增的道具信息, 用于client维护背包。</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+	<section>
+		<title>一键领取观星奖励</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">一键领取观星奖励</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>网关服务器</entry>
+							<entry>constellation_onekey_reward_receive</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+                                            <row>
+                                                <entry>data</entry>
+                                                <entry>Array(Array(reward_content, ...), add_items)</entry>
+                                                <entry>当日可领的10份奖品， 领取条件参见sysconfig. reward_content和add_items格式如下:</entry>
+                                            </row>
+                                            <row>
+                                                <entry>reward_content</entry>
+                                                <entry>Array(type, id, quantity, received)</entry>
+                                                <entry>奖品格式。type:奖励类型。 id: 当type为道具时， 为item_id. quantity:奖励数量, received:已领取。</entry>
+                                            </row>
+											<row>
+												<entry>add_items</entry>
+                                                <entry>Array(Array(user_item_id, item_type, item_id, quantity), ...)</entry>
+												<entry>玩家背包新增的道具信息, 用于client维护背包。</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+</chapter>

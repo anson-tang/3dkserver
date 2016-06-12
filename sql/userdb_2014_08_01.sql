@@ -1,0 +1,2 @@
+ALTER TABLE `tb_character` ADD COLUMN `energy` SMALLINT(5) UNSIGNED NULL DEFAULT 0  AFTER `prestige` ;
+

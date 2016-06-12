@@ -1,0 +1,2 @@
+ALTER TABLE `tb_character` ADD COLUMN `chaos_level` SMALLINT(5) UNSIGNED NULL DEFAULT 0  AFTER `energy` , ADD COLUMN `scene_star` SMALLINT(5) UNSIGNED NULL DEFAULT 0  AFTER `chaos_level` ;
+

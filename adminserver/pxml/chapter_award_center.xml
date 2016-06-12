@@ -1,0 +1,213 @@
+<chapter>
+    <title>领奖中心相关协议</title>
+    <para>本章定义了所有领奖中心相关的通信协议格式</para>
+
+	<section>
+		<title>可领取的奖励列表</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">获取玩家可领取的奖励列表</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>网关服务器</entry>
+							<entry>award_center_info</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+                                            <row>
+                                                <entry>data</entry>
+                                                <entry>Array(Array(award_id, award_type, award_detail), ...)</entry>
+                                                <entry>玩家在领奖中心可领取的奖励信息。award_detail由award_type确定。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>award_id</entry>
+                                                <entry>uint</entry>
+                                                <entry>奖励ID。用于标识奖励的唯一性。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>award_type</entry>
+                                                <entry>uint</entry>
+                                                <entry>奖励类型。1:首充奖励; 2:竞技场奖励; 3:天外天扫荡奖励; 4:月卡奖励; 5:VIP福利; 6:限时神将排名奖励; 7:限时神将积分奖励; 8:累计充值奖励; 9:累计消费奖励; 10:兑换码礼包奖励; 11:观星未领的奖励; 12:副本全扫荡奖励; 13:GM奖励; 14:竞技场幸运排名奖励; 15:每日任务未领的奖励; 16:世界Boss排名奖励; 17:豪华签到未领的奖励; 18:世界Boss击杀奖励; 19:大乱斗排名奖励; 20:充值返利; 21:团购奖励; 22:成功下载资源包的奖励</entry>
+                                            </row>
+                                            <row>
+                                                <entry>award_detail</entry>
+                                                <entry>Array</entry>
+                                                <entry><literallayout>不同奖励类型包含的详细参数。
+award_type=1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22时, award_detail = Array(award_time, items_list)
+award_type=2时, award_detail = Array(award_time, arena_rank, items_list)
+award_type=12时, award_detail = Array(award_time, scene_id, items_list)
+注: 其中的award_time为发奖时间, items_list=Array(Array(item_type, item_id, item_num), ...)
+</literallayout></entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+	<section>
+		<title>领取奖励</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">玩家领取奖励</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>网关服务器</entry>
+							<entry>get_award_center</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+                                            <row>
+                                                <entry>type</entry>
+                                                <entry>uint</entry>
+                                                <entry>领奖方式。1:单次领奖; 2:全部领取; </entry>
+                                            </row>
+                                            <row>
+                                                <entry>award_id</entry>
+                                                <entry>uint</entry>
+                                                <entry>奖励的ID。用于标识某奖励的唯一性。type为2时, 此字段无意义, 为0。</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+                                            <row>
+                                                <entry>data</entry>
+                                                <entry>Array(Array(user_item_id, item_type, item_id, quantity), ...)</entry>
+                                                <entry>领奖返回的道具详情。</entry>
+                                            </row>
+											<row>
+												<entry>user_item_id</entry>
+												<entry>uint</entry>
+												<entry>玩家道具ID。item_type=1时user_item_id为0。</entry>
+											</row>
+											<row>
+												<entry>item_type</entry>
+												<entry>uint</entry>
+												<entry>奖励的道具类型, 含金币、仙魂</entry>
+											</row>
+											<row>
+												<entry>item_id</entry>
+												<entry>uint</entry>
+												<entry>奖励的道具ID</entry>
+											</row>
+											<row>
+												<entry>quantity</entry>
+												<entry>uint</entry>
+												<entry>奖励的道具数量</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+</chapter>

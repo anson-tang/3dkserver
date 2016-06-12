@@ -1,0 +1,28 @@
+#!/bin/bash
+
+cd `dirname "$0"`
+LOGDIR=$PWD/logs
+PIDDIR=$PWD/pid
+UMASK=022
+. setup_env.sh
+
+sleep 2
+echo "$PIDDIR/character.pid Starting..."
+twistd -repoll --pidfile $PIDDIR/character.pid -l $LOGDIR/character.log --umask=$UMASK -y $PWD/characterserver/main.py
+sleep 1
+
+echo "$PIDDIR/gateway.pid Starting..."
+twistd -repoll --pidfile $PIDDIR/gateway.pid -l $LOGDIR/gateway.log --umask=$UMASK -y $PWD/gatewayserver/main.py
+sleep 1
+
+echo "$PIDDIR/message.pid Starting ..."
+twistd -repoll --pidfile $PIDDIR/message.pid -l $LOGDIR/message.log --umask=$UMASK -y $PWD/messageserver/main.py
+sleep 1
+
+echo "$PIDDIR/alliance.pid Starting ..."
+twistd -repoll --pidfile $PIDDIR/alliance.pid -l $LOGDIR/allianec.log --umask=$UMASK -y $PWD/allianceserver/main.py
+sleep 1
+
+echo "$PIDDIR/game.pid Starting..."
+twistd -repoll --pidfile $PIDDIR/game.pid -l $LOGDIR/game.log --umask=$UMASK -y $PWD/gameserver/main.py
+

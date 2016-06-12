@@ -1,0 +1,287 @@
+<chapter>
+    <title>邮件相关协议</title>
+    <para>本章定义了所有邮件相关的通信协议格式。</para>
+
+	<section>
+		<title>推送有新邮件的通知</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">向在线玩家推送有新邮件的通知, 已通知过的不再通知</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>网关服务器</entry>
+							<entry>客户端</entry>
+							<entry>new_mail_notify</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry></entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+    <section> 
+        <title>获取邮件列表</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">根据不同类型获取邮件列表, 每次最多加载10条</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>网关服务器</entry>
+							<entry>mail_list</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+                                            <row>
+                                                <entry>type</entry>
+                                                <entry>uint.</entry>
+                                                <entry>页签分类。1:全部; 2:好友; 3:系统; 4:战斗</entry>
+                                            </row>
+                                            <row>
+                                                <entry>index</entry>
+                                                <entry>uint.</entry>
+                                                <entry>邮件列表的起始下标, 从0开始</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+                                            <row>
+                                                <entry>mail_list</entry>
+                                                <entry>Array(type, cur_index, total, Array(mail, mail))</entry>
+                                                <entry>邮件列表详情。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>type</entry>
+                                                <entry>uint.</entry>
+                                                <entry>页签分类。1:全部; 2:好友; 3:系统; 4:战斗</entry>
+                                            </row>
+                                            <row>
+                                                <entry>cur_index</entry>
+                                                <entry>uint.</entry>
+                                                <entry>邮件列表的起始下标。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>total</entry>
+                                                <entry>uint.</entry>
+                                                <entry>相应页签所包含的邮件总数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>mail</entry>
+                                                <entry>Array(mail_id, send_time, mail_type, mail_module_id, detail)</entry>
+                                                <entry>邮件列表详情。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>mail_id</entry>
+                                                <entry>unit.</entry>
+                                                <entry>邮件ID。唯一标识一封邮件。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>send_time</entry>
+                                                <entry>timestamp.</entry>
+                                                <entry>收到邮件的时间戳。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>mail_type</entry>
+                                                <entry>uint.</entry>
+                                                <entry>邮件类型说明。2:好友; 3:系统; 4:战斗</entry>
+                                            </row>
+                                            <row>
+                                                <entry>mail_module_id</entry>
+                                                <entry>uint.</entry>
+                                                <entry>邮件模板ID。详见设计文档。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>detail</entry>
+                                                <entry>Array.</entry>
+                                                <entry><literallayout>不同邮件类型模板所含的详细数据。
+module_id=2001、2003、2101, 2302, 2303, 2305, 2306时, detail=Array(lead_id, nick_name); lead_id.Int.角色ID,客户端用于颜色显示
+module_id=2002时, detail=Array(lead_id, nick_name, rank); rank.Int.竞技场排名
+module_id=2102时, detail=Array(lead_id, nick_name, score); score.Int.武林大会失去的积分
+module_id=2201、2202时, detail=Array(lead_id, nick_name, shard_id); shard_id.Int.宝物碎片ID
+module_id=2301时, detail=Array(cid, lead_id, nick_name, status, content); cid.Int.发送请求的玩家ID. status.Int.申请状态,1-未处理,2-已同意,3-已拒绝 content.string.好友申请发来的附言
+module_id=2304时, detail=Array(cid, lead_id, nick_name, content); 好友留言 cid.Int.好友的CID
+module_id=2401时, detail=Array(reward_time, rank, Array(Array(item_type, item_id, item_num), ...)); reward_time.timestamp.决斗场奖励时间; rank.Int.名次;
+module_id=2402时, detail=Array(rank, Array(Array(item_type, item_id, item_num), ...)); rank.Int.武林大会中的名次; 
+module_id=2501, 2502, 2503, 2504时, detail=Array(alliance_name);
+                                                </literallayout></entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+    <section> 
+        <title>处理好友请求邮件</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">在邮件列表中[接受]或[拒绝]好友请求, 并发送邮件。</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>网关服务器</entry>
+							<entry>mail_handle_invite</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+                                            <row>
+                                                <entry>mail_id</entry>
+                                                <entry>uint.</entry>
+                                                <entry>邮件ID。唯一标识一封邮件。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>status</entry>
+                                                <entry>uint.</entry>
+                                                <entry>状态值。2-同意, 3-拒绝 </entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+</chapter>

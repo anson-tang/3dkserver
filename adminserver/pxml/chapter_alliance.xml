@@ -1,0 +1,2690 @@
+<chapter>
+    <title>仙盟相关协议</title>
+    <para>本章定义了所有仙盟相关的通信协议格式。</para>
+
+    <section id="alli_info"> 
+        <title>我的仙盟基本信息</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">我的仙盟基本信息</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>仙盟服务器</entry>
+							<entry>alliance_info</entry>
+							<entry>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+                                            <row>
+                                                <entry>cd_for_join</entry>
+                                                <entry>uint</entry>
+                                                <entry>加入仙盟的冻结时间。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>contribution</entry>
+                                                <entry>uint</entry>
+                                                <entry>个人在仙盟中的贡献值</entry>
+                                            </row>
+                                            <row>
+                                                <entry>position</entry>
+                                                <entry>uint</entry>
+                                                <entry>个人在仙盟中的职位，1：会长，2：副会长，3：成员。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance_info</entry>
+                                                <entry>Array(alliance_id, alliance_name, alliance_level, leader_id, leader_name, leader_level, members_cnt, alliance_might, description, alliance_exp, rank, build_level_info, notice)</entry>
+                                                <entry>仙盟信息。值为None时，意味玩家不在任何仙盟。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance_id</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟ID,内部唯一。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance_name</entry>
+                                                <entry>string</entry>
+                                                <entry>仙盟名称，内部唯一。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance_level</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟当前等级。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>leader_id</entry>
+                                                <entry>uint</entry>
+                                                <entry>会长的角色ID。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>leader_name</entry>
+                                                <entry>string</entry>
+                                                <entry>会长昵称。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>leader_level</entry>
+                                                <entry>uint</entry>
+                                                <entry>会长等级。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>members_cnt</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟拥有成员的个数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance_might</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟战力。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>description</entry>
+                                                <entry>string</entry>
+                                                <entry>仙盟宣言。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance_exp</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟当前建设值, 升级时用。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>rank</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟排名。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>build_level_info</entry>
+                                                <entry>Array(sacrifice_level, shop_level, scene_level, task_hall_level)</entry>
+                                                <entry>仙盟中的建筑等级。sacrifice_level-仙盟女蜗宫等级, shop_level-仙盟商店等级, scene_level-仙盟副本等级, task_hall_level-仙盟任务大厅等级 </entry>
+                                            </row>
+                                            <row>
+                                                <entry>notice</entry>
+                                                <entry>string</entry>
+                                                <entry>仙盟公告。</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+    <section> 
+        <title>获取仙盟列表</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">返回已有仙盟列表, 每次10个</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>仙盟服务器</entry>
+							<entry>alliance_list</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+                                            <row>
+                                                <entry>index</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟列表的起始下标, 从0开始</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+                                            <row>
+                                                <entry>alliance_list</entry>
+                                                <entry>Array(cur_index, total, Array(alliance, ...))</entry>
+                                                <entry>仙盟列表信息。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>cur_index</entry>
+                                                <entry>uint.</entry>
+                                                <entry>仙盟列表的起始下标。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>total</entry>
+                                                <entry>uint.</entry>
+                                                <entry>仙盟总数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance</entry>
+                                                <entry>Array(alliance_id, alliance_name, alliance_level, leader_id, leader_name, leader_level, members_cnt, alliance_might, description, alliance_exp, rank)</entry>
+                                                <entry>仙盟列表信息。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance_id</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟ID,内部唯一。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance_name</entry>
+                                                <entry>string</entry>
+                                                <entry>仙盟名称,内部唯一。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance_level</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟当前等级。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>leader_id</entry>
+                                                <entry>uint</entry>
+                                                <entry>会长的角色ID。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>leader_name</entry>
+                                                <entry>string</entry>
+                                                <entry>会长昵称。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>leader_level</entry>
+                                                <entry>uint</entry>
+                                                <entry>会长等级。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>members_cnt</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟拥有成员的个数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance_might</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟总战力。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>description</entry>
+                                                <entry>string</entry>
+                                                <entry>仙盟宣言</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance_exp</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟当前建设值, 升级时用。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>rank</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟排行</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+    <section> 
+        <title>搜索仙盟</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">搜索仙盟</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>仙盟服务器</entry>
+							<entry>alliance_search</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+                                            <row>
+                                                <entry>name</entry>
+                                                <entry>uint</entry>
+                                                <entry>要搜索的仙盟名称，支持模糊搜索</entry>
+                                            </row>
+                                            <row>
+                                                <entry>index</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟列表的起始下标, 从0开始</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+                                            <row>
+                                                <entry>alliance_list</entry>
+                                                <entry>Array(cur_index, total, Array(alliance, ...))</entry>
+                                                <entry>仙盟列表信息。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>cur_index</entry>
+                                                <entry>uint.</entry>
+                                                <entry>仙盟列表的起始下标。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>total</entry>
+                                                <entry>uint.</entry>
+                                                <entry>仙盟总数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance</entry>
+                                                <entry>Array(alliance_id, alliance_name, alliance_level, leader_id, leader_name, leader_level, members_cnt, alliance_might, description, alliance_exp, rank)</entry>
+                                                <entry>仙盟列表信息。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance_id</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟ID,内部唯一。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance_name</entry>
+                                                <entry>string</entry>
+                                                <entry>仙盟名称,内部唯一。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance_level</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟当前等级。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>leader_id</entry>
+                                                <entry>uint</entry>
+                                                <entry>会长的角色ID。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>leader_name</entry>
+                                                <entry>string</entry>
+                                                <entry>会长昵称。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>leader_level</entry>
+                                                <entry>uint</entry>
+                                                <entry>会长等级。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>members_cnt</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟拥有成员的个数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance_might</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟总战力。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>description</entry>
+                                                <entry>string</entry>
+                                                <entry>仙盟宣言</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance_exp</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟当前建设值, 升级时用。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>rank</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟排行</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+    <section> 
+        <title>创建仙盟</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">创建仙盟</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>仙盟服务器</entry>
+							<entry>alliance_create</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+                                            <row>
+                                                <entry>name</entry>
+                                                <entry>string</entry>
+                                                <entry>要创建的仙盟名称, 最多6个汉字</entry>
+                                            </row>
+                                            <row>
+                                                <entry>type</entry>
+                                                <entry>uint</entry>
+                                                <entry>1:点卷credits创建，2:金币golds创建</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+                                            <row>
+                                                <entry>data</entry>
+                                                <entry>Arrat(golds, credits, alliance).</entry>
+                                                <entry>创建仙盟后的基本信息。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>golds</entry>
+                                                <entry>uint.</entry>
+                                                <entry>玩家剩余的金币数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>credits</entry>
+                                                <entry>uint.</entry>
+                                                <entry>玩家剩余的钻石数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance</entry>
+                                                <entry>Array(alliance_id, alliance_name, alliance_level, leader_id, leader_name, leader_level, members_cnt, alliance_might, description, alliance_exp, rank, notice)</entry>
+                                                <entry>仙盟列表信息。参数详解见<link linkend="alli_info">仙盟基本信息</link></entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+    <section> 
+        <title>已申请仙盟列表(无仙盟时)</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">已申请仙盟列表(无仙盟时)</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>仙盟服务器</entry>
+							<entry>alliance_request_list</entry>
+							<entry>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+											<row>
+												<entry>alliance_ids</entry>
+												<entry>Array(alliance_id, )</entry>
+												<entry>已申请仙盟的ID列表.</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+    <section> 
+        <title>申请/取消申请加入仙盟</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+                            <entry namest="2" nameend="5">申请/取消申请加入仙盟</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>仙盟服务器</entry>
+							<entry>alliance_join_request</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+                                            <row>
+                                                <entry>alliance_id</entry>
+                                                <entry>uint</entry>
+                                                <entry>欲申请加入的仙盟ID。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>action</entry>
+                                                <entry>uint</entry>
+                                                <entry>1:欲申请加入, 2:取消申请。</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+    <section> 
+        <title>仙盟的加入申请列表(会长或副会长调用)</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">仙盟的加入申请列表(会长或副会长调用)</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>仙盟服务器</entry>
+							<entry>alliance_join_audit_list</entry>
+							<entry>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+											<row>
+												<entry>applies</entry>
+												<entry>Array(applier, )</entry>
+												<entry>申请中的玩家列表.</entry>
+											</row>
+											<row>
+												<entry>applier</entry>
+												<entry>Array(cid, name, level, lead_id, might, rank, request_time)</entry>
+												<entry>申请中的玩家信息.</entry>
+											</row>
+											<row>
+												<entry>cid</entry>
+												<entry>uint</entry>
+												<entry>申请玩家ID.</entry>
+											</row>
+											<row>
+												<entry>name</entry>
+												<entry>string</entry>
+												<entry>申请玩家昵称</entry>
+											</row>
+											<row>
+												<entry>level</entry>
+												<entry>uint</entry>
+												<entry>申请玩家等级</entry>
+											</row>
+											<row>
+												<entry>lead_id</entry>
+												<entry>uint</entry>
+												<entry>申请玩家角色ID</entry>
+											</row>
+											<row>
+												<entry>might</entry>
+												<entry>uint</entry>
+												<entry>申请玩家战力</entry>
+											</row>
+											<row>
+												<entry>rank</entry>
+												<entry>uint</entry>
+												<entry>申请玩家在竞技场上的排名</entry>
+											</row>
+											<row>
+												<entry>request_time</entry>
+												<entry>uint</entry>
+												<entry>申请时间</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+    <section> 
+        <title>仙盟申请的审核</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">仙盟申请的审核</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>仙盟服务器</entry>
+							<entry>alliance_join_audit</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+                                            <row>
+                                                <entry>agree</entry>
+                                                <entry>uint</entry>
+                                                <entry>1:拒绝，2:同意。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>cid</entry>
+                                                <entry>uint</entry>
+                                                <entry>cid:同意或拒绝申请的玩家ID。当agree=1且cid为0或null时，为一键拒绝</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+    <section> 
+        <title>仙盟成员列表</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">仙盟成员列表</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>仙盟服务器</entry>
+							<entry>alliance_members</entry>
+							<entry>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+                                            <row>
+                                                <entry>members</entry>
+                                                <entry>Array(member,)</entry>
+                                                <entry>仙盟成员信息。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>member</entry>
+                                                <entry>Array(cid, name, level, lead_id, might, rank, contribution_total, contribution, online, position)</entry>
+                                                <entry>仙盟成员信息。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>cid</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟成员玩家ID。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>name</entry>
+                                                <entry>string</entry>
+                                                <entry>仙盟成员昵称。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>level</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟成员角色等级。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>lead_id</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟成员角色ID。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>might</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟成员当前战力。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>rank</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟成员竞技场排名。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>contribution_total</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟成员仙盟内总贡献值。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>contribution</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟成员仙盟内当前拥有的贡献值。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>logoff_time</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟成员离线时间，0为在线。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>position</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟成员职位，1：会长，2：副会长，3：成员。</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+    <section> 
+        <title>获取仙盟动态</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">获取仙盟的动态, 每次最多加载20条</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>仙盟服务器</entry>
+							<entry>alliance_action</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+                                            <row>
+                                                <entry>index</entry>
+                                                <entry>uint.</entry>
+                                                <entry>动态列表的起始下标, 从0开始</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+                                            <row>
+                                                <entry>action_list</entry>
+                                                <entry>Array(cur_index, total, Array(action, ...))</entry>
+                                                <entry>动态列表详情。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>cur_index</entry>
+                                                <entry>uint.</entry>
+                                                <entry>动态列表的起始下标。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>total</entry>
+                                                <entry>uint.</entry>
+                                                <entry>动态列表中的总数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>action</entry>
+                                                <entry>Array(action_id, action_time, cid, lead_id, nick_name, level, detail)</entry>
+                                                <entry>动态列表详情。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>action_id</entry>
+                                                <entry>uint.</entry>
+                                                <entry>动态分类ID。3001-3009。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>action_time</entry>
+                                                <entry>timestamp.</entry>
+                                                <entry>事件发生的时间戳。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>cid</entry>
+                                                <entry>uint.</entry>
+                                                <entry>主动执行该动态的玩家ID。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>lead_id</entry>
+                                                <entry>uint.</entry>
+                                                <entry>主动执行该动态的玩家角色ID。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>nick_name</entry>
+                                                <entry>string.</entry>
+                                                <entry>主动执行该动态的玩家昵称。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>level</entry>
+                                                <entry>uint.</entry>
+                                                <entry>主动执行该动态的玩家等级。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>detail</entry>
+                                                <entry>Array.</entry>
+                                                <entry><literallayout>不同动态模板所含的详细数据。
+module_id=3002时, detail=Array(), 空;
+module_id=3001、3003、3004、3005, 3010时, detail=Array(lead_id, nick_name);
+module_id=3006, 3007时, detail=Array(consume, exp, contribute); consume:Int.消耗的金币/钻石数。exp:Int.仙盟建设度。contribute:Int.个人贡献。
+module_id=3008时, detail=Array(sacrifice_level); sacrifice_level:Int.女蜗宫等级, 客户端通过等级读取奖励配置。
+module_id=3009时, detail=Array(build_type, from_level, to_level); build_type:建筑类型 1-仙盟大殿,2-仙盟女蜗宫,3-仙盟商店,4-仙盟副本,5-仙盟任务大厅。 from_level:Int.升级前的等级。to_level:Int.升级后的等级。
+注：模板中{0}为主动执行该动态的玩家昵称。{1+}为detail中的信息。
+                                                </literallayout></entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+    <section> 
+        <title>仙盟任命</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+                            <entry namest="2" nameend="5">仙盟任命, 含副会长辞去职务、会长任命/罢免副会长、会长转让</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>仙盟服务器</entry>
+							<entry>alliance_appoint</entry>
+							<entry>
+                            	<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>member_cid</entry>
+												<entry>uint</entry>
+												<entry>要任命的成员玩家ID</entry>
+											</row>
+											<row>
+												<entry>new_position</entry>
+												<entry>uint</entry>
+												<entry>要任命的职位。1:会长，2：副会长，3：成员。</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+    <section> 
+        <title>退出仙盟</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">仙盟成员主动退出仙盟</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>仙盟服务器</entry>
+							<entry>alliance_leave</entry>
+							<entry>
+                            	<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+    <section> 
+        <title>将成员踢出仙盟</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">将成员踢出仙盟</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>仙盟服务器</entry>
+							<entry>alliance_kick</entry>
+							<entry>
+                            	<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>member_cid</entry>
+												<entry>uint</entry>
+												<entry>要踢的成员玩家ID</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+    <section> 
+        <title>修改仙盟宣言/公告</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+                            <entry namest="2" nameend="5">修改仙盟宣言/公告</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>仙盟服务器</entry>
+							<entry>alliance_modify_content</entry>
+							<entry>
+                            	<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>type</entry>
+												<entry>uint.</entry>
+												<entry>修改类型。1:宣言, 2:公告。</entry>
+											</row>
+											<row>
+												<entry>content</entry>
+												<entry>string.</entry>
+												<entry>新的内容</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+    <section> 
+        <title>获取仙盟留言板信息</title>
+        <para>
+        	<informaltable>
+        		<tgroup cols="5">
+        			<colspec colnum="1" colname="1"/>
+        			<colspec colnum="2" colname="2"/>
+        			<colspec colnum="3" colname="3"/>
+        			<colspec colnum="4" colname="4"/>
+        			<colspec colnum="5" colname="5"/>
+        			<tbody>
+        				<row>
+        					<entry>协议名称</entry>
+                            <entry namest="2" nameend="5">分页获取仙盟留言板中的所有留言, 每次10条。</entry>
+        				</row>
+        				<row>
+        					<entry>呼叫方</entry>
+        					<entry>应答方</entry>
+        					<entry>函数名</entry>
+        					<entry>请求参数说明</entry>
+        					<entry>返回值格式说明</entry>
+        				</row>
+        				<row>
+        					<entry>客户端</entry>
+        					<entry>仙盟服务器</entry>
+        					<entry>alliance_get_messages</entry>
+        					<entry>
+                            	<informaltable>
+        							<tgroup cols="3">
+        								<colspec colnum="1" colname="1"/>
+        								<colspec colnum="2" colname="2"/>
+        								<colspec colnum="3" colname="3"/>
+        								<tbody>
+        									<row>
+        										<entry>参数</entry>
+        										<entry>类型</entry>
+        										<entry>说明</entry>
+        									</row>
+                                            <row>
+                                                <entry>index</entry>
+                                                <entry>uint.</entry>
+                                                <entry>留言板中留言列表的起始下标, 从0开始, 每次10条。</entry>
+                                            </row>
+        								</tbody>
+        							</tgroup>
+        						</informaltable>
+        					</entry>
+        					<entry>
+        						<informaltable>
+        							<tgroup cols="3">
+        								<colspec colnum="1" colname="1"/>
+        								<colspec colnum="2" colname="2"/>
+        								<colspec colnum="3" colname="3"/>
+        								<tbody>
+        									<row>
+        										<entry>参数</entry>
+        										<entry>类型</entry>
+        										<entry>说明</entry>
+        									</row>
+        									<row>
+        										<entry>result</entry>
+        										<entry>uint</entry>
+        										<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+        									</row>
+                                            <row>
+                                                <entry>data</entry>
+                                                <entry>Array(cur_index, total, left_count, Array(message, ...))</entry>
+                                                <entry>留言板列表详情。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>cur_index</entry>
+                                                <entry>uint.</entry>
+                                                <entry>留言板列表的起始下标。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>total</entry>
+                                                <entry>uint.</entry>
+                                                <entry>留言板列表中的总数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>left_count</entry>
+                                                <entry>uint.</entry>
+                                                <entry>玩家今日剩余的可留言次数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>message</entry>
+                                                <entry>Array(message_time, cid, lead_id, nick_name, level, position, content)</entry>
+                                                <entry>留言板列表详情。</entry>
+                                            </row>
+        								</tbody>
+        							</tgroup>
+        						</informaltable>
+        					</entry>
+        				</row>
+        				<row>
+        					<entry>协议说明</entry>
+        					<entry namest="2" nameend="5"/>
+        				</row>
+        			</tbody>
+        		</tgroup>
+        	</informaltable>
+        </para>
+    </section>
+
+    <section> 
+        <title>新增留言</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+                            <entry namest="2" nameend="5">在留言板上新增留言</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>仙盟服务器</entry>
+							<entry>alliance_add_messages</entry>
+							<entry>
+                            	<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>content</entry>
+												<entry>string.</entry>
+												<entry>新的留言。</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+    <section> 
+        <title>解散仙盟</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">没有其他成员时解散仙盟</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>仙盟服务器</entry>
+							<entry>alliance_dissolve</entry>
+							<entry>
+                            	<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+    <section> 
+        <title>建筑升级</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">提升仙盟建筑的等级, 消耗仙盟建设度</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>仙盟服务器</entry>
+							<entry>alliance_upgrade</entry>
+							<entry>
+                            	<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>build_type</entry>
+												<entry>int.</entry>
+												<entry>建筑类型。1-仙盟大殿, 2-仙盟女蜗宫, 3-仙盟商店, 4-仙盟副本, 5-仙盟任务大厅</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+                                            <row>
+                                                <entry>final_level</entry>
+                                                <entry>int</entry>
+                                                <entry>仙盟建筑升级后的等级。注: 仙盟大殿的等级即仙盟等级。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance_exp</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟剩余的建设值。</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+    <section> 
+        <title>[仙盟大殿] 基本信息</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">获取成员的建设状态和仙盟的建设信息</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>仙盟服务器</entry>
+							<entry>alliance_hall_info</entry>
+							<entry>
+                            	<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+                                            <row>
+                                                <entry>data</entry>
+                                                <entry>Array(contribute_detail, contribute_status, alliance_level, alliance_exp)</entry>
+                                                <entry>仙盟大殿的当前基本信息。新增仙盟的公共信息, 用于客户端实时更新。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>contribute_detail</entry>
+                                                <entry>Array(Array(nick_name, contribute_id), ...)</entry>
+                                                <entry>仙盟大殿中的成员建设信息列表。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>contribute_status</entry>
+                                                <entry>int.</entry>
+                                                <entry>当日是否完成建设的标志位。0-当日已建设, 1-当日未建设</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance_level</entry>
+                                                <entry>uint.</entry>
+                                                <entry>仙盟当前等级。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance_exp</entry>
+                                                <entry>uint.</entry>
+                                                <entry>仙盟当前的建设值。</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+    <section> 
+        <title>[仙盟大殿] 成员建设</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+                            <entry namest="2" nameend="5">建设仙盟大殿, 消耗金币/钻石, 个人和仙盟获得建设度。</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>仙盟服务器</entry>
+							<entry>alliance_hall_contribute</entry>
+							<entry>
+                            	<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+                                            <row>
+                                                <entry>contribute_id</entry>
+                                                <entry>int。</entry>
+                                                <entry>建设度ID。(分为初级建设、中级建设等等)</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+                                            <row>
+                                                <entry>alliance_exp</entry>
+                                                <entry>uint</entry>
+                                                <entry>仙盟当前的建设值, 升级时用。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>contribution</entry>
+                                                <entry>uint</entry>
+                                                <entry>个人在仙盟中当前拥有的贡献值</entry>
+                                            </row>
+                                            <row>
+                                                <entry>contribution_total</entry>
+                                                <entry>uint</entry>
+                                                <entry>个人在仙盟内的总贡献值</entry>
+                                            </row>
+                                            <row>
+                                                <entry>golds</entry>
+                                                <entry>uint</entry>
+                                                <entry>玩家剩余的金币数</entry>
+                                            </row>
+                                            <row>
+                                                <entry>credits</entry>
+                                                <entry>uint</entry>
+                                                <entry>玩家剩余的钻石数</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+    <section> 
+        <title>[仙盟女蜗宫] 基本信息</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">获取成员的拜祭信息</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>仙盟服务器</entry>
+							<entry>alliance_sacrifice_info</entry>
+							<entry>
+                            	<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+                                            <row>
+                                                <entry>data</entry>
+                                                <entry>Array(left_total_count, left_contribute_count, left_credits_count, alliance_level, alliance_exp)</entry>
+                                                <entry>仙盟女娲宫的基本信息。新增仙盟的公共信息, 用于客户端实时更新。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>left_total_count</entry>
+                                                <entry>int.</entry>
+                                                <entry>仙盟女蜗宫剩余每日拜祭的次数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>left_contribute_count</entry>
+                                                <entry>int.</entry>
+                                                <entry>今日玩家剩余的消耗贡献拜祭次数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>left_credits_count</entry>
+                                                <entry>int.</entry>
+                                                <entry>今日玩家剩余的消耗钻石拜祭次数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance_level</entry>
+                                                <entry>uint.</entry>
+                                                <entry>仙盟当前等级。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance_exp</entry>
+                                                <entry>uint.</entry>
+                                                <entry>仙盟当前的建设值。</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+    <section> 
+        <title>[仙盟女蜗宫] 拜祭女蜗</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+                            <entry namest="2" nameend="5">拜祭女蜗, 获取对应的奖励。</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>仙盟服务器</entry>
+							<entry>alliance_sacrifice</entry>
+							<entry>
+                            	<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>sacrifice_type</entry>
+												<entry>int.</entry>
+												<entry>拜祭类型。1:消耗个人贡献拜祭; 2:消耗钻石拜祭。</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+                                            <row>
+                                                <entry>data</entry>
+                                                <entry>Array(left_total_count, left_credits_count, left_contribute_count, person_contribution,, credits, add_items)</entry>
+                                                <entry>拜祭后的详细信息。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>left_total_count</entry>
+                                                <entry>int.</entry>
+                                                <entry>仙盟女蜗宫剩余每日拜祭的次数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>left_contribute_count</entry>
+                                                <entry>int.</entry>
+                                                <entry>今日玩家剩余的消耗贡献拜祭次数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>left_credits_count</entry>
+                                                <entry>int.</entry>
+                                                <entry>今日玩家剩余的消耗钻石拜祭次数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>person_contribution</entry>
+                                                <entry>uint</entry>
+                                                <entry>个人在仙盟中的剩余贡献值。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>credits</entry>
+                                                <entry>uint</entry>
+                                                <entry>玩家剩余的钻石数。消耗钻石拜祭时参数有值</entry>
+                                            </row>
+                                            <row>
+                                                <entry>add_items</entry>
+                                                <entry>Array(Array(user_item_id, item_type, item_id, item_num), ...)</entry>
+                                                <entry>玩家拜祭后获得的奖励列表。用于client维护背包。</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+    <section> 
+        <title>[仙盟商店] 珍宝基本信息</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">获取仙盟商店中珍宝的兑换信息</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>仙盟服务器</entry>
+							<entry>alliance_shop_limit_item_info</entry>
+							<entry>
+                            	<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+                                            <row>
+                                                <entry>data</entry>
+                                                <entry>Array(need_refresh_seconds, Array(Array(index, item_type, item_id, item_num, left_quantity, need_contribute, status), ...), alliance_level, alliance_exp)</entry>
+                                                <entry>仙盟商城中的珍宝详情。新增仙盟的公共信息, 用于客户端实时更新。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>need_refresh_seconds</entry>
+                                                <entry>int.</entry>
+                                                <entry>距离下一次刷新所需秒数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>index</entry>
+                                                <entry>int.</entry>
+                                                <entry>index为某一栏道具的标识, 范围0-2。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>item_type</entry>
+                                                <entry>int.</entry>
+                                                <entry>道具类型。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>item_id</entry>
+                                                <entry>int.</entry>
+                                                <entry>道具ID。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>item_num</entry>
+                                                <entry>int.</entry>
+                                                <entry>道具数量。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>left_quantity</entry>
+                                                <entry>int.</entry>
+                                                <entry>仙盟总计剩余的可兑换次数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>need_contribute</entry>
+                                                <entry>int.</entry>
+                                                <entry>兑换该道具所需的个人贡献度。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>status</entry>
+                                                <entry>int.</entry>
+                                                <entry>是否可兑换的状态位。0-不能兑换, 1-可以兑换</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance_level</entry>
+                                                <entry>uint.</entry>
+                                                <entry>仙盟当前等级。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance_exp</entry>
+                                                <entry>uint.</entry>
+                                                <entry>仙盟当前的建设值。</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+    <section> 
+        <title>[仙盟商店] 兑换珍宝</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+                            <entry namest="2" nameend="5">兑换仙盟商店中的珍宝。</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>仙盟服务器</entry>
+							<entry>alliance_shop_limit_item_exchange</entry>
+							<entry>
+                            	<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+                                            <row>
+                                                <entry>index</entry>
+                                                <entry>int.</entry>
+                                                <entry>index为某一栏道具的标识, 范围0-2。</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+                                            <row>
+                                                <entry>data</entry>
+                                                <entry>Array(shop_item_id, left_quantity, person_contribution, add_items)</entry>
+                                                <entry>仙盟商城中的道具详情。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>index</entry>
+                                                <entry>int.</entry>
+                                                <entry>index为某一栏道具的标识, 范围0-2。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>left_quantity</entry>
+                                                <entry>int.</entry>
+                                                <entry>仙盟总计剩余的可兑换次数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>person_contribution</entry>
+                                                <entry>int.</entry>
+                                                <entry>玩家剩余的贡献度。</entry>
+                                            </row>
+											<row>
+												<entry>add_items</entry>
+                                                <entry>Array(Array(user_item_id, item_type, item_id, item_num), ...)</entry>
+												<entry>兑换后新增的道具信息。用于client维护背包</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+    <section> 
+        <title>[仙盟商店] 道具基本信息</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">获取仙盟商店中道具的可兑换信息</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>仙盟服务器</entry>
+							<entry>alliance_shop_item_info</entry>
+							<entry>
+                            	<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+                                            <row>
+                                                <entry>data</entry>
+                                                <entry>Array(Array(Array(shop_item_id, exchanged_count), ...), alliance_level, alliance_exp)</entry>
+                                                <entry>仙盟商城中已兑换的道具详情。新增仙盟的公共信息, 用于客户端实时更新。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>shop_item_id</entry>
+                                                <entry>int.</entry>
+                                                <entry>仙盟商城道具ID, 可唯一标识一个道具。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>exchanged_count</entry>
+                                                <entry>int.</entry>
+                                                <entry>当日此道具已兑换的次数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance_level</entry>
+                                                <entry>uint.</entry>
+                                                <entry>仙盟当前等级。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>alliance_exp</entry>
+                                                <entry>uint.</entry>
+                                                <entry>仙盟当前的建设值。</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+    <section> 
+        <title>[仙盟商店] 兑换道具</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+                            <entry namest="2" nameend="5">兑换仙盟商店中的道具。</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>仙盟服务器</entry>
+							<entry>alliance_shop_item_exchange</entry>
+							<entry>
+                            	<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+                                            <row>
+                                                <entry>shop_item_id</entry>
+                                                <entry>int.</entry>
+                                                <entry>仙盟商城道具ID, 可唯一标识一个道具。</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+                                            <row>
+                                                <entry>data</entry>
+                                                <entry>Array(shop_item_id, exchanged_count, person_contribution, add_items)</entry>
+                                                <entry>仙盟商城中的道具详情。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>shop_item_id</entry>
+                                                <entry>int.</entry>
+                                                <entry>仙盟商城道具ID, 可唯一标识一个道具。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>exchanged_count</entry>
+                                                <entry>int.</entry>
+                                                <entry>当日此道具已兑换的次数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>person_contribution</entry>
+                                                <entry>int.</entry>
+                                                <entry>玩家剩余的贡献度。</entry>
+                                            </row>
+											<row>
+												<entry>add_items</entry>
+                                                <entry>Array(Array(user_item_id, item_type, item_id, item_num), ...)</entry>
+												<entry>兑换后新增的道具信息。用于client维护背包</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+</chapter>

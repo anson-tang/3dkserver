@@ -1,0 +1,96 @@
+<chapter>
+    <title>恭贺新禧活动相关协议</title>
+    <para>本章定义了所有恭贺新禧相关的通信协议格式。</para>
+
+	<section>
+		<title>兑换恭贺新禧</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">兑换恭贺新禧礼包</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>网关服务器</entry>
+							<entry>客户端</entry>
+							<entry>exchange_happy_new_year</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+    										<row>
+    											<entry>result</entry>
+    											<entry>uint</entry>
+                                                <entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+                                            </row>
+											<row>
+												<entry>data</entry>
+												<entry>Array(Array(item_user_id, itemID, itemType, itemNum))</entry>
+												<entry>礼包内容</entry>
+											</row>
+											<row>
+												<entry>item_user_id</entry>
+												<entry>uint</entry>
+												<entry>物品唯一id</entry>
+											</row>
+											<row>
+												<entry>itemID</entry>
+												<entry>uint</entry>
+												<entry>物品ID</entry>
+											</row>
+											<row>
+												<entry>itemType</entry>
+												<entry>uint</entry>
+												<entry>物品类型</entry>
+											</row>
+											<row>
+												<entry>itenNum</entry>
+												<entry>uint</entry>
+												<entry>物品数量</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+						</row>
+		</para>
+	</section>
+
+</chapter>

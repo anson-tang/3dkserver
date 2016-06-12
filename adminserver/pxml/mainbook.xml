@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE book PUBLIC '-//OASIS//DTD DocBook XML v4.2//EN' 'http://docbook.org/xml/4.2/docbookx.dtd' 
+[
+    <!ENTITY chapter_base                           SYSTEM "chapter_base.xml">
+    <!ENTITY chapter_dialogue                       SYSTEM "chapter_dialogue.xml">
+    <!ENTITY chapter_shop                           SYSTEM "chapter_shop.xml">
+    <!ENTITY chapter_fellow                         SYSTEM "chapter_fellow.xml">
+    <!ENTITY chapter_camp                           SYSTEM "chapter_camp.xml">
+    <!ENTITY chapter_battle                         SYSTEM "chapter_battle.xml">
+    <!ENTITY chapter_chaos                          SYSTEM "chapter_chaos.xml">
+    <!ENTITY chapter_climbing_tower                 SYSTEM "chapter_climbing_tower.xml">
+    <!ENTITY chapter_bag                            SYSTEM "chapter_bag.xml">
+    <!ENTITY chapter_decomposition                  SYSTEM "chapter_decomposition.xml">
+    <!ENTITY chapter_award_center                   SYSTEM "chapter_award_center.xml">
+    <!ENTITY chapter_activity                       SYSTEM "chapter_activity.xml">
+    <!ENTITY chapter_excite_activity                SYSTEM "chapter_excite_activity.xml">
+    <!ENTITY chapter_package                        SYSTEM "chapter_package.xml">
+    <!ENTITY chapter_constellation                  SYSTEM "chapter_constellation.xml">
+    <!ENTITY chapter_chat                           SYSTEM "chapter_chat.xml">
+    <!ENTITY chapter_mail                           SYSTEM "chapter_mail.xml">
+    <!ENTITY chapter_friend                         SYSTEM "chapter_friend.xml">
+    <!ENTITY chapter_alliance                       SYSTEM "chapter_alliance.xml">
+    <!ENTITY chapter_atlaslist                      SYSTEM "chapter_atlaslist.xml">
+    <!ENTITY chapter_goodwill                       SYSTEM "chapter_goodwill.xml">
+    <!ENTITY chapter_worldboss                      SYSTEM "chapter_worldboss.xml">
+    <!ENTITY chapter_daily_quest                    SYSTEM "chapter_daily_quest.xml">
+    <!ENTITY chapter_joust                          SYSTEM "chapter_joust.xml">
+    <!ENTITY chapter_xiaohongdian                   SYSTEM "chapter_xiaohongdian.xml">
+    <!ENTITY chapter_lover_kiss                     SYSTEM "chapter_lover_kiss.xml">
+    <!ENTITY chapter_open_server_activity           SYSTEM "chapter_open_server_activity.xml">
+    <!ENTITY chapter_achievement                    SYSTEM "chapter_achievement.xml">
+
+    <!ENTITY errorlist SYSTEM "errorlist.xml">
+]>
+<?xml-stylesheet href="docbook.css" type="text/css" ?>
+
+<book xmlns="http://docbook.org/ns/docbook" version="5.0" xml:lang="zh_cn">
+    <title>3DK 通信协议说明文档</title>
+    <dedication>
+        <para>定义和约束在3dk项目服务器和客户端通讯中需要的通信协议，和协议中数据格式。</para>
+    </dedication>
+    &chapter_base;
+    &chapter_dialogue;
+    &chapter_shop;
+    &chapter_fellow;
+    &chapter_camp;
+    &chapter_battle;
+    &chapter_chaos;
+    &chapter_climbing_tower;
+    &chapter_bag;
+    &chapter_decomposition;
+    &chapter_award_center;
+    &chapter_activity;
+    &chapter_excite_activity;
+    &chapter_package;
+    &chapter_constellation;
+    &chapter_chat;
+    &chapter_mail;
+    &chapter_friend;
+    &chapter_alliance;
+    &chapter_atlaslist;
+    &chapter_goodwill;
+    &chapter_worldboss;
+    &chapter_daily_quest;
+    &chapter_joust;
+    &chapter_xiaohongdian;
+    &chapter_lover_kiss;
+    &chapter_open_server_activity;
+    &chapter_achievement;
+    &errorlist;
+</book>

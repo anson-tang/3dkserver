@@ -1,0 +1,1481 @@
+<chapter>
+	<title>活动相关协议</title>
+	<para>本章定义了所有活动相关的通信协议格式。</para>
+
+    <section id="lottery"> 
+        <title>活动战斗胜利后的翻牌</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">活动战斗胜利后的翻牌, 活动含夺宝、竞技场、比武</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>网关服务器</entry>
+							<entry>sync_arena_lottery</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>item_type</entry>
+												<entry>uint</entry>
+												<entry>道具类型</entry>
+											</row>
+											<row>
+												<entry>item_id</entry>
+												<entry>uint</entry>
+												<entry>道具ID</entry>
+											</row>
+											<row>
+												<entry>item_num</entry>
+												<entry>uint</entry>
+												<entry>道具数量</entry>
+											</row>
+											<row>
+												<entry>msg_notice</entry>
+												<entry>uint</entry>
+												<entry>是否需要走马灯公告。0:不需要,1:需要</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+                                            <row>
+                                                <entry>user_item</entry>
+                                                <entry>Array(user_item_id, item_type, item_id, item_num)</entry>
+                                                <entry>背包道具信息。</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+	<section>
+		<title>[竞技场] 获取竞技场基本信息</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">获取竞技场信息</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>网关服务器</entry>
+							<entry>get_arena_info</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+											<row>
+												<entry>data</entry>
+												<entry>Array(rank, daily_reward_time, arena_data)</entry>
+												<entry>副本群信息，具体参数值如下：</entry>
+											</row>
+											<row>
+												<entry>rank</entry>
+												<entry>uint</entry>
+												<entry>当前排名. 注: rank=0时表示玩家还没有排名</entry>
+											</row>
+											<row>
+												<entry>daily_reward_time</entry>
+												<entry>uint</entry>
+												<entry>timestamp.服务器每日发放奖励的时间点.</entry>
+											</row>
+											<row>
+												<entry>arena_data</entry>
+												<entry>Array(Array(cid, level, name, rank, reward_gold, reward_prestige, Array(fellow_id, ...), lead_id), ...)</entry>
+												<entry>竞技场的玩家或机器人的列表详情.</entry>
+											</row>
+											<row>
+												<entry>cid</entry>
+												<entry>uint</entry>
+												<entry>玩家的ID或0. 注: 0表示是机器人</entry>
+											</row>
+											<row>
+												<entry>level</entry>
+												<entry>uint</entry>
+												<entry>玩家或机器人的等级. 如果是机器人, level为多个怪物中任意一个怪物的等级</entry>
+											</row>
+											<row>
+												<entry>name</entry>
+												<entry>uint</entry>
+												<entry>玩家或机器人的名字.</entry>
+											</row>
+											<row>
+												<entry>rank</entry>
+												<entry>uint</entry>
+												<entry>玩家或机器人的排名.</entry>
+											</row>
+											<row>
+												<entry>reward_gold</entry>
+												<entry>uint</entry>
+												<entry>排名对应的金币奖励.</entry>
+											</row>
+											<row>
+												<entry>reward_prestige</entry>
+												<entry>uint</entry>
+												<entry>排名对应的声望奖励.</entry>
+											</row>
+											<row>
+												<entry>fellow_id</entry>
+												<entry>uint</entry>
+												<entry>玩家的伙伴ID 或机器人的怪物ID.</entry>
+											</row>
+											<row>
+												<entry>lead_id</entry>
+												<entry>uint</entry>
+												<entry>玩家的主角ID或0. 注: 0表示是机器人</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+	<section>
+		<title>[竞技场] 获取竞技场排行榜</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">获取竞技场排行榜, 最多10名玩家</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>网关服务器</entry>
+							<entry>get_arena_ranklist</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+											<row>
+												<entry>data</entry>
+												<entry>Array(Array(cid, level, name, rank, reward_gold, reward_prestige, Array(fellow_id, ...), lead_id), ...)</entry>
+												<entry>竞技场的排行榜，长度最大为10，具体参数值如下：</entry>
+											</row>
+											<row>
+												<entry>cid</entry>
+												<entry>uint</entry>
+												<entry>玩家的ID或0. 注: 0表示是机器人</entry>
+											</row>
+											<row>
+												<entry>level</entry>
+												<entry>uint</entry>
+												<entry>角色的等级.</entry>
+											</row>
+											<row>
+												<entry>name</entry>
+												<entry>uint</entry>
+												<entry>角色的昵称.</entry>
+											</row>
+											<row>
+												<entry>rank</entry>
+												<entry>uint</entry>
+												<entry>角色的排名.</entry>
+											</row>
+											<row>
+												<entry>reward_gold</entry>
+												<entry>uint</entry>
+												<entry>排名对应的金币奖励.</entry>
+											</row>
+											<row>
+												<entry>reward_prestige</entry>
+												<entry>uint</entry>
+												<entry>排名对应的声望奖励.</entry>
+											</row>
+											<row>
+												<entry>fellow_id</entry>
+												<entry>uint</entry>
+												<entry>伙伴ID.</entry>
+											</row>
+											<row>
+												<entry>lead_id</entry>
+												<entry>uint</entry>
+												<entry>玩家的主角ID.</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+	<section>
+		<title>[竞技场] 竞技场战斗结束时请求更新</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+                            <entry namest="2" nameend="5">战斗结束后，更新玩家在竞技场中的排名、声望等信息</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>网关服务器</entry>
+							<entry>sync_arena_rank</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>my_rank</entry>
+												<entry>uint</entry>
+												<entry>挑战前玩家的排名</entry>
+											</row>
+											<row>
+												<entry>enemy_rank</entry>
+												<entry>uint</entry>
+												<entry>挑战前对手的排名</entry>
+											</row>
+											<row>
+												<entry>battle_status</entry>
+												<entry>uint</entry>
+												<entry>挑战后的结果。0:战斗失败; 1:战斗胜利</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+											<row>
+												<entry>data</entry>
+												<entry>Array(Array(Array(item_type, item_id, item_num, msg_notice), ...), douzhan)</entry>
+												<entry>挑战胜利后，可供翻牌的道具列表。长度为3。</entry>
+											</row>
+											<row>
+												<entry>douzhan</entry>
+												<entry>uint</entry>
+												<entry>玩家剩余的斗战点数</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+	<section>
+		<title>[竞技场] 竞技场幸运排名</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">竞技场幸运排名</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>网关服务器</entry>
+							<entry>get_arena_lucky_ranklist</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+											<row>
+												<entry>data</entry>
+												<entry>Array(last_lucky_ranks, cur_lucky_ranks)</entry>
+												<entry>幸运排名的详细内容</entry>
+											</row>
+											<row>
+												<entry>last_lucky_ranks</entry>
+												<entry>Array(Array(rank, nick_name, credits, lead_id), ...)</entry>
+												<entry>上轮的幸运排名</entry>
+											</row>
+											<row>
+												<entry>cur_lucky_ranks</entry>
+												<entry>Array(Array(rank, credits), ...)</entry>
+												<entry>本轮的幸运排名</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+	<section>
+		<title>[竞技场] 获取声望兑换中玩家的状态信息</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">获取竞技场 声望兑换中玩家的状态信息</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>网关服务器</entry>
+							<entry>prestige_exchange_status</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+                                            <row>
+                                                <entry>data</entry>
+                                                <entry>Array(Array(exchange_ID, total_count, daily_count), ...)</entry>
+                                                <entry>刷新神秘商店的物品。详细参数说明如下: </entry>
+                                            </row>
+                                            <row>
+                                                <entry>exchange_ID</entry>
+                                                <entry>uint</entry>
+                                                <entry>要兑换的ID。可唯一标识一个可兑换的道具。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>total_count</entry>
+                                                <entry>uint</entry>
+                                                <entry>总共已兑换的次数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>daily_count</entry>
+                                                <entry>uint</entry>
+                                                <entry>今日已兑换的次数。</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+	<section>
+		<title>[竞技场] 声望兑换</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">竞技场中声望兑换</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>网关服务器</entry>
+							<entry>prestige_exchange</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+                                            <row>
+                                                <entry>exchange_ID</entry>
+                                                <entry>uint</entry>
+                                                <entry>要兑换的ID。可唯一标识一个可兑换的道具。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>exchange_count</entry>
+                                                <entry>uint</entry>
+                                                <entry>要兑换的次数。</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+                                            <row>
+                                                <entry>data</entry>
+                                                <entry>Array(prestige, total_count, daily_count, add_items)</entry>
+                                                <entry>刷新神秘商店的物品。详细参数说明如下: </entry>
+                                            </row>
+                                            <row>
+                                                <entry>prestige</entry>
+                                                <entry>uint</entry>
+                                                <entry>玩家剩余的声望。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>total_count</entry>
+                                                <entry>uint</entry>
+                                                <entry>总共已兑换次数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>daily_count</entry>
+                                                <entry>uint</entry>
+                                                <entry>今日已兑换次数。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>add_items</entry>
+                                                <entry>Array(Array(user_item_id, item_type, item_id, item_num), ...)</entry>
+                                                <entry>兑换后新增的道具信息。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>user_item_id</entry>
+                                                <entry>uint</entry>
+                                                <entry>玩家道具ID。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>item_type</entry>
+                                                <entry>uint</entry>
+                                                <entry>道具类型。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>item_id</entry>
+                                                <entry>uint</entry>
+                                                <entry>道具ID。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>item_num</entry>
+                                                <entry>uint</entry>
+                                                <entry>道具新增数量。</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+	<section>
+		<title>[夺宝] 获取夺宝基本信息</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">获取夺宝信息</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>网关服务器</entry>
+							<entry>get_plunder_info</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>plunder_type</entry>
+												<entry>uint</entry>
+												<entry>抢夺类型。1:战马抢夺; 2:兵书抢夺; </entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+											<row>
+												<entry>data</entry>
+												<entry>Array(avoid_war_time, Array(Array(user_shard_id, shard_id, quantity), ...))</entry>
+												<entry>副本群信息，具体参数值如下：</entry>
+											</row>
+											<row>
+												<entry>avoid_war_time</entry>
+												<entry>timestamp</entry>
+												<entry>免战剩余时间。</entry>
+											</row>
+											<row>
+												<entry>user_shard_id</entry>
+												<entry>uint</entry>
+												<entry>玩家宝物碎片ID。</entry>
+											</row>
+											<row>
+												<entry>shard_id</entry>
+												<entry>uint</entry>
+												<entry>宝物碎片ID。</entry>
+											</row>
+											<row>
+												<entry>quntity</entry>
+												<entry>uint</entry>
+												<entry>碎片数量。</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+	<section>
+		<title>[夺宝] 免战</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">免战</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>网关服务器</entry>
+							<entry>avoid_war</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>type</entry>
+												<entry>uint</entry>
+												<entry>免战方式。1:使用免战牌; 2:使用点卷; </entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+											<row>
+												<entry>data</entry>
+												<entry>Array(avoid_war_time, credits, left_items)</entry>
+												<entry>副本群信息，具体参数值如下：</entry>
+											</row>
+											<row>
+												<entry>avoid_war_time</entry>
+												<entry>timestamp</entry>
+												<entry>免战剩余时间。</entry>
+											</row>
+											<row>
+												<entry>credits</entry>
+												<entry>uint</entry>
+												<entry>玩家当前剩余点卷数。</entry>
+											</row>
+                                            <row>
+                                                <entry>left_items</entry>
+                                                <entry>Array(Array(user_item_id, item_type, item_id, quatity), ...)</entry>
+                                                <entry>使用道具后玩家的道具信息。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>user_item_id</entry>
+                                                <entry>uint</entry>
+                                                <entry>玩家道具ID。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>item_type</entry>
+                                                <entry>uint</entry>
+                                                <entry>道具类型。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>item_id</entry>
+                                                <entry>uint</entry>
+                                                <entry>道具ID。</entry>
+                                            </row>
+                                            <row>
+                                                <entry>quantity</entry>
+                                                <entry>uint</entry>
+                                                <entry>道具剩余的数量。为0时需要client从背包中删除此道具</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+	<section>
+		<title>[夺宝] 获取抢夺列表</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">获取抢夺列表</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>网关服务器</entry>
+							<entry>avoid_player_list</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>shard_id</entry>
+												<entry>uint</entry>
+												<entry>要抢夺的碎片道具ID </entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+											<row>
+												<entry>data</entry>
+												<entry>Array(Array(cid, level, name, Array(fellow_id, ...)))</entry>
+												<entry>副本群信息，具体参数值如下：</entry>
+											</row>
+											<row>
+												<entry>cid</entry>
+												<entry>uint</entry>
+												<entry>被挑战玩家ID, 0为机器人。</entry>
+											</row>
+											<row>
+												<entry>level</entry>
+												<entry>uint</entry>
+												<entry>被挑战玩家或机器人等级。</entry>
+											</row>
+											<row>
+												<entry>name</entry>
+												<entry>string</entry>
+												<entry>被挑战玩家或机器人姓名。</entry>
+											</row>
+											<row>
+												<entry>fellow_id</entry>
+												<entry>uint</entry>
+                                                <entry>被挑战玩家或机器人阵容上的伙伴或主角ID。当挑战玩家时，需要额外根据cid<link linkend="get_camp">获取该玩家阵容</link>详细信息。</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+	<section>
+		<title>[夺宝] 开始抢夺玩家</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">开始抢夺玩家之前, 检查可抢夺的状态。不检查机器人。</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>网关服务器</entry>
+							<entry>start_plunder</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>plunder_cid</entry>
+												<entry>uint</entry>
+                                                <entry>被夺的角色ID。>0:正常玩家; </entry>
+											</row>
+											<row>
+												<entry>shard_id</entry>
+												<entry>uint</entry>
+												<entry>被夺的碎片ID。</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+	<section>
+		<title>[夺宝] 夺宝</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">夺宝</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>网关服务器</entry>
+							<entry>plunder</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>cid</entry>
+												<entry>uint</entry>
+                                                <entry>被夺的角色ID。>0:正常玩家; 0:机器人; </entry>
+											</row>
+											<row>
+												<entry>shard_id</entry>
+												<entry>uint</entry>
+												<entry>被夺的碎片ID。</entry>
+											</row>
+											<row>
+												<entry>won</entry>
+												<entry>uint</entry>
+												<entry>战斗结果： 0：失败，1：胜利。 </entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+											<row>
+												<entry>data</entry>
+												<entry>Array(plunder_result, douzhan, Array(user_shard_id, shard_id), Array(Array(item_type, item_id, item_num, msg_notice), ...))</entry>
+												<entry>具体参数值如下：</entry>
+											</row>
+											<row>
+												<entry>plunder_result</entry>
+												<entry>int</entry>
+												<entry>抢夺结果。0：未抢到, 后面的Array为None；1：成功抢到。</entry>
+											</row>
+											<row>
+												<entry>douzhan</entry>
+												<entry>int</entry>
+												<entry>抢夺后剩余斗战点。</entry>
+											</row>
+											<row>
+												<entry>user_shard_id</entry>
+												<entry>uint</entry>
+												<entry>仅当plunder_result = 1时有值。抢到的碎片玩家ID，内部唯一。</entry>
+											</row>
+											<row>
+												<entry>shard_id</entry>
+												<entry>uint</entry>
+												<entry>仅当plunder_result = 1时有值。抢到的碎片ID，Item数值表内唯一。</entry>
+											</row>
+											<row>
+												<entry>item_type</entry>
+												<entry>uint</entry>
+												<entry>仅当won = 1时有值。用于翻牌的道具类型。</entry>
+											</row>
+											<row>
+												<entry>item_id</entry>
+												<entry>uint</entry>
+												<entry>仅当won = 1时有值。用于翻牌的道具ID。</entry>
+											</row>
+											<row>
+												<entry>item_num</entry>
+												<entry>uint</entry>
+												<entry>仅当won = 1时有值。用于翻牌的道具个数。</entry>
+											</row>
+											<row>
+												<entry>msg_notice</entry>
+												<entry>uint</entry>
+												<entry>仅当won = 1时有值。是否需要走马灯公告。0:不需要,1:需要</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+	<section>
+		<title>[夺宝] 连续多次夺宝</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5">连续多次夺宝</entry>
+						</row>
+						<row>
+							<entry>呼叫方</entry>
+							<entry>应答方</entry>
+							<entry>函数名</entry>
+							<entry>请求参数说明</entry>
+							<entry>返回值格式说明</entry>
+						</row>
+						<row>
+							<entry>客户端</entry>
+							<entry>网关服务器</entry>
+							<entry>plunder_streak</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>cid</entry>
+												<entry>uint</entry>
+                                                <entry>被夺的角色ID, 连续被抢夺的对象只能是机器人。0:机器人。</entry>
+											</row>
+											<row>
+												<entry>shard_id</entry>
+												<entry>uint</entry>
+												<entry>被夺的碎片ID。</entry>
+											</row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+							<entry>
+								<informaltable>
+									<tgroup cols="3">
+										<colspec colnum="1" colname="1"/>
+										<colspec colnum="2" colname="2"/>
+										<colspec colnum="3" colname="3"/>
+										<tbody>
+											<row>
+												<entry>参数</entry>
+												<entry>类型</entry>
+												<entry>说明</entry>
+											</row>
+											<row>
+												<entry>result</entry>
+												<entry>uint</entry>
+												<entry>状态。0：获取成功。其它见<link linkend="errorlist">错误代码列表</link>.</entry>
+											</row>
+											<row>
+												<entry>data</entry>
+												<entry>Array(plunder_result, douzhan, new_shard, add_items, lottery_items)</entry>
+												<entry>具体参数值如下：</entry>
+											</row>
+											<row>
+												<entry>plunder_result</entry>
+												<entry>int</entry>
+												<entry>抢夺结果。0：未抢到, 后面的Array为None；1：成功抢到。</entry>
+											</row>
+											<row>
+												<entry>douzhan</entry>
+												<entry>int</entry>
+												<entry>抢夺后剩余斗战点。斗战点为0时且plunder_result=0时, 表示玩家斗战点不足。</entry>
+											</row>
+                                            <row>
+                                                <entry>new_shard</entry>
+                                                <entry>Array(user_shard_id, shard_id)</entry>
+                                                <entry>成功抢到的宝物碎片。仅当plunder_result = 1时有值</entry>
+                                            </row>
+											<row>
+												<entry>user_shard_id</entry>
+												<entry>uint</entry>
+												<entry>抢到的碎片玩家ID，内部唯一。</entry>
+											</row>
+											<row>
+												<entry>shard_id</entry>
+												<entry>uint</entry>
+												<entry>抢到的碎片ID，Item数值表内唯一。</entry>
+											</row>
+                                            <row>
+                                                <entry>add_items</entry>
+                                                <entry>Array(Array(user_item_id, item_type, item_id, item_num), ...)</entry>
+                                                <entry>抢夺后翻牌获得的道具, 用于客户端维护背包</entry>
+                                            </row>
+                                            <row>
+                                                <entry>user_item_id</entry>
+                                                <entry>uint</entry>
+                                                <entry>玩家道具ID。</entry>
+                                            </row>
+											<row>
+												<entry>item_type</entry>
+												<entry>uint</entry>
+												<entry>道具类型。</entry>
+											</row>
+											<row>
+												<entry>item_id</entry>
+												<entry>uint</entry>
+												<entry>道具ID。</entry>
+											</row>
+											<row>
+												<entry>item_num</entry>
+												<entry>uint</entry>
+												<entry>道具个数。</entry>
+											</row>
+                                            <row>
+                                                <entry>lottery_items</entry>
+                                                <entry>Array(Array(item_type, item_id, item_num, msg_notice), ...)</entry>
+                                                <entry>翻牌获得的道具, 用于客户端展示, 数组长度为抢夺的次数</entry>
+                                            </row>
+										</tbody>
+									</tgroup>
+								</informaltable>
+							</entry>
+						</row>
+						<row>
+							<entry>协议说明</entry>
+							<entry namest="2" nameend="5"/>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+	<section>
+		<title>[夺宝] 翻牌</title>
+		<para>
+			<informaltable>
+				<tgroup cols="5">
+					<colspec colnum="1" colname="1"/>
+					<colspec colnum="2" colname="2"/>
+					<colspec colnum="3" colname="3"/>
+					<colspec colnum="4" colname="4"/>
+					<colspec colnum="5" colname="5"/>
+					<tbody>
+						<row>
+							<entry>协议名称</entry>
+							<entry namest="2" nameend="5"></entry>
+						</row>
+						<row>
+                            <entry namest="1" nameend="5">参见协议：<link linkend="lottery">活动战斗胜利后的翻牌</link>。</entry>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
+		</para>
+	</section>
+
+</chapter>

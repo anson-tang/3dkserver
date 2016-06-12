@@ -1,0 +1,106 @@
+#!/usr/bin/env python
+#-*-coding: utf-8-*-
+
+import sys, os
+from os.path import abspath, dirname, join, normpath
+
+PREFIX = normpath( dirname( abspath( __file__ ) ) )
+lib_path = normpath( join( PREFIX, 'lib' ) )
+if lib_path not in sys.path: sys.path = [ lib_path ] + sys.path
+
+from twisted.internet import reactor, defer
+from rpc              import ConnectorCreator
+from setting          import GATEWAYSERVER
+from utils            import print_e
+
+cmd                 = None
+seconds             = 0
+uids_admin_want_add = []
+
+USAGE = '''{0}
+
+[ USAGE ]:
+./switcher on                打开游戏区。
+./switcher status            查看游戏区当前状态。
+./switcher off               关闭游戏区，但不需要停止服务器。
+./switcher off 0             关闭游戏区，但不需要停止服务器。
+./switcher off N             关闭游戏区，广播所有线上客户端，N + 3秒后游戏区所有进程停止。
+./switcher add accountname accountname accountname   增加Admin账号，在游戏区关闭的情况下，仍然可以正常进入游戏。
+'''
+
+def switch( p ):
+    switch_on = ( cmd == 'on' )
+    return p.call( 'gm_server_status_switch', ( switch_on, seconds ) )
+
+def add_admin( p ):
+    return p.call( 'gm_add_admin_user', uids_admin_want_add )
+
+def status( p ):
+    return p.call( 'gm_server_status', None)
+
+def usage( err ):
+    print USAGE.format( '[ E ]: ' + str( err ) if err else '' )
+    return False
+
+def parse_argv():
+    global cmd, switch_on, seconds, uids_admin_want_add
+
+    _argv = sys.argv
+    _l    = len( _argv )
+
+    if _l < 2:
+        return usage( '命令不正确。' )
+    else:
+        cmd = _argv[1].strip()
+
+        if cmd in ( 'on', 'off', 'status' ) and _l == 2:
+            return True
+        else:
+            if cmd == 'off' and _l == 3:
+                try:
+                    seconds = int( _argv[2] )
+                except:
+                    return usage( '倒计时格式不正确。' )
+            elif cmd == 'add' and _l >= 3:
+                try:
+                    uids_admin_want_add = map( lambda s:s.strip(), _argv[2:] )
+                except:
+                    return usage( '用户账号格式不正确。' )
+            else:
+                return usage( '未知错误。' )
+
+            return True
+
+@defer.inlineCallbacks
+def connected( p ):
+    res = None
+
+    if parse_argv():
+        if p:
+            try:
+                if cmd == 'add':
+                    res = yield add_admin( p )
+                elif cmd == 'status':
+                    res = yield status( p )
+                elif cmd in ( 'on', 'off' ):
+                    res = yield switch( p )
+                else:
+                    usage( '{0}: {1}'.format( '未知命令', cmd ) )
+            except:
+                print_e()
+
+            print '[ connected ]OK. cmd', cmd, 'and res([1, 1] means executed successfully)', res
+        else:
+            print '[ failed ]connect to {0} : {1} failed'.format(GATEWAYSERVER['localhost'], GATEWAYSERVER['port'])
+
+    reactor.stop()
+
+def failed(error):
+    print '[ failed ]connect failed. error', error.getErrorMessage()
+    reactor.stop()
+
+def main():
+    ConnectorCreator( None ).connect(GATEWAYSERVER['localhost'], GATEWAYSERVER['port'], timeout = 1).addCallbacks( connected, failed )
+    reactor.run()
+
+if __name__ == '__main__': main()

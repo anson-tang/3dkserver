@@ -1,0 +1,258 @@
+<chapter>
+     <title>错误代码列表</title>
+     <para>本章定义了错误代码及意义约束。</para>
+
+     <section id="errorlist">
+         <title>错误代码列表</title>
+         <para><informaltable>
+            <tgroup cols="2">
+            <colspec colnum="1" colname="1" />
+            <colspec colnum="2" colname="2" />
+            <tbody>
+                <row><entry>错误代码</entry><entry>错误</entry></row>
+                <row><entry>1</entry><entry>未知错误</entry></row>
+                <row><entry>2</entry><entry>没有玩家信息</entry></row>
+                <row><entry>3</entry><entry>未知玩家ID</entry></row>
+                <row><entry>4</entry><entry>登录时请求的参数错误</entry></row>
+                <row><entry>5</entry><entry>session不可用</entry></row>
+                <row><entry>6</entry><entry>网络异常</entry></row>
+                <row><entry>7</entry><entry>该昵称已被占用</entry></row>
+                <row><entry>8</entry><entry>服务器维护中</entry></row>
+                <row><entry>9</entry><entry>账号处于被封号中</entry></row>
+                <row><entry>10</entry><entry>账号处于被禁言中</entry></row>
+                <row><entry>11</entry><entry>客户端版本号异常</entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry>13</entry><entry>数据异常, 请重新登陆</entry></row>
+                <row><entry>14</entry><entry>客户端已失去连接, 请重新登陆</entry></row>
+                <row><entry>15</entry><entry>重连失败</entry></row>
+                <row><entry>16</entry><entry>策划缺少配置</entry></row>
+                <row><entry>17</entry><entry>客户端参数格式错误</entry></row>
+                <row><entry>18</entry><entry>奖励已领取</entry></row>
+                <row><entry>19</entry><entry>请求条件不满足</entry></row>
+                <row><entry>20</entry><entry>可购买次数已达上限, 无法购买</entry></row>
+                <row><entry>21</entry><entry>当前剩余次数未用完, 无法购买</entry></row>
+                <row><entry>22</entry><entry>玩家不在线</entry></row>
+                <row><entry>23</entry><entry>玩家不存在</entry></row>
+                <row><entry>24</entry><entry>没有奖励可领取</entry></row>
+                <row><entry>25</entry><entry>玩家重复的注册请求</entry></row>
+                <row><entry>26</entry><entry>注册失败, 请稍后重试</entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry>39</entry><entry>玩家荣誉不足</entry></row>
+                <row><entry>40</entry><entry>玩家钻石数不足</entry></row>
+                <row><entry>41</entry><entry>玩家道具数不足</entry></row>
+                <row><entry>42</entry><entry>玩家金币数不足</entry></row>
+                <row><entry>43</entry><entry>玩家仙魂数不足</entry></row>
+                <row><entry>44</entry><entry>玩家等级限制</entry></row>
+                <row><entry>45</entry><entry>玩家魂玉不足</entry></row>
+                <row><entry>46</entry><entry>玩家声望不足</entry></row>
+                <row><entry>47</entry><entry>玩家斗战点不足</entry></row>
+                <row><entry>48</entry><entry>新手引导步骤已完成</entry></row>
+                <row><entry>49</entry><entry>玩家VIP等级限制</entry></row>
+                <row><entry>50</entry><entry>道具类型不匹配</entry></row>
+                <row><entry>51</entry><entry>未知道具</entry></row>
+                <row><entry>52</entry><entry>未知伙伴</entry></row>
+                <row><entry>53</entry><entry>伙伴炼化条件不满足</entry></row>
+                <row><entry>54</entry><entry>装备炼化条件不满足</entry></row>
+                <row><entry>55</entry><entry>宝物炼化条件不满足</entry></row>
+                <row><entry>56</entry><entry>未知装备</entry></row>
+                <row><entry>57</entry><entry>未知宝物</entry></row>
+                <row><entry>58</entry><entry>伙伴重生条件不满足</entry></row>
+                <row><entry>59</entry><entry>装备重生条件不满足</entry></row>
+                <row><entry>60</entry><entry>道具不能使用</entry></row>
+                <row><entry>61</entry><entry>宝物重生条件不满足</entry></row>
+                <row><entry>62</entry><entry>神秘商店免费刷新次数已用完</entry></row>
+                <row><entry>63</entry><entry>领奖中心奖励已过期</entry></row>
+                <row><entry>64</entry><entry>竞技场结算期间22:00-22:15, 不能战斗</entry></row>
+                <row><entry>65</entry><entry>无礼包奖励无领取</entry></row>
+                <row><entry>66</entry><entry>当前时间点没有桃可吃</entry></row>
+                <row><entry>67</entry><entry>尚未购买月卡</entry></row>
+                <row><entry>68</entry><entry>无能重复领取今日的月卡奖励</entry></row>
+                <row><entry>69</entry><entry>豪华签到充值金额不足, 请先充值</entry></row>
+                <row><entry>70</entry><entry>今日的豪华签到奖励已领取</entry></row>
+                <row><entry>71</entry><entry>没有找到抽卡池</entry></row>
+                <row><entry>72</entry><entry>抽卡的类型异常</entry></row>
+                <row><entry>73</entry><entry>冷却时间还未结束</entry></row>
+                <row><entry>74</entry><entry>商城道具的购买次数限制</entry></row>
+                <row><entry>75</entry><entry>竞技场 声望兑换次数限制</entry></row>
+                <row><entry>76</entry><entry>天外天 当前在可扫荡的最高层, 不能扫荡</entry></row>
+                <row><entry>77</entry><entry>天外天 已经在第一层, 不能重置</entry></row>
+                <row><entry>78</entry><entry>天外天 扫荡中, 不能重置</entry></row>
+                <row><entry>79</entry><entry>天外天 没有正在进行的扫荡, 无法停止</entry></row>
+                <row><entry>80</entry><entry>夺宝 对方碎片数量发送变化，重新选择被抢对象</entry></row>
+                <row><entry>81</entry><entry>宝物碎片数量已发生变化</entry></row>
+                <row><entry>82</entry><entry>伙伴数量不足</entry></row>
+                <row><entry>83</entry><entry>主角不可替换</entry></row>
+                <row><entry>84</entry><entry>相同的伙伴不能同时上阵</entry></row>
+                <row><entry>85</entry><entry>怪物组挑战次数限制</entry></row>
+                <row><entry>86</entry><entry>今日挑战次数已用完</entry></row>
+                <row><entry>87</entry><entry>活动副本未开启</entry></row>
+                <row><entry>88</entry><entry>不是满星副本, 不能扫荡</entry></row>
+                <row><entry>89</entry><entry>与精英副本关联的剧情副本未通关, 不能战斗</entry></row>
+                <row><entry>90</entry><entry>VIP等级不足, VIP2及以上才可购买</entry></row>
+                <row><entry>91</entry><entry>成长计划已购买</entry></row>
+                <row><entry>92</entry><entry>购买成长计划后才可领取</entry></row>
+                <row><entry>93</entry><entry>玩家等级达到后才可领取</entry></row>
+                <row><entry>94</entry><entry>字符长度超出限制</entry></row>
+                <row><entry>95</entry><entry>前一个精英副本需要战斗胜利后才能挑战当前副本</entry></row>
+                <row><entry>96</entry><entry>剧情副本 需要挑战成功才能领取奖励</entry></row>
+                <row><entry>97</entry><entry>剧情副本 重置挑战次数失败</entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry>100</entry><entry>目标不能升级</entry></row>
+                <row><entry>101</entry><entry>对方已经是您的好友了</entry></row>
+                <row><entry>102</entry><entry>您已向此玩家提出了好友邀请, 请耐心等待</entry></row>
+                <row><entry>103</entry><entry>未知邮件异常</entry></row>
+                <row><entry>104</entry><entry>斗战点已达最大值</entry></row>
+                <row><entry>105</entry><entry>今日可领取斗战点次数已用完</entry></row>
+                <row><entry>106</entry><entry>您的好友数量已达到上限</entry></row>
+                <row><entry>107</entry><entry>对方好友数量已达到上限</entry></row>
+                <row><entry>108</entry><entry>伙伴背包容量不足</entry></row>
+                <row><entry>109</entry><entry>对方不是您的好友</entry></row>
+                <row><entry>110</entry><entry>进阶等级已达到上限</entry></row>
+                <row><entry>111</entry><entry>道具背包容量不足</entry></row>
+                <row><entry>112</entry><entry>装备背包容量不足</entry></row>
+                <row><entry>113</entry><entry>宝物背包容量不足</entry></row>
+                <row><entry>114</entry><entry>装备碎片背包容量不足</entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry>121</entry><entry>观星奖励已领完</entry></row>
+                <row><entry>122</entry><entry>当日观星次数已达上限</entry></row>
+                <row><entry>123</entry><entry>数据已更新, 请刷新页面。未领奖励已发放到领奖中心</entry></row>
+                <row><entry>124</entry><entry>可点击的星星数据和服务器不同步</entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry>130</entry><entry>仙盟名重复</entry></row>
+                <row><entry>131</entry><entry>已达到可申请加入的仙盟个数</entry></row>
+                <row><entry>132</entry><entry>仙盟不存在</entry></row>
+                <row><entry>133</entry><entry>无权限进行此操作</entry></row>
+                <row><entry>134</entry><entry>已经在仙盟中了</entry></row>
+                <row><entry>135</entry><entry>仙盟已满员</entry></row>
+                <row><entry>136</entry><entry>会长不能离开仙盟</entry></row>
+                <row><entry>137</entry><entry>副会长人数已达上限</entry></row>
+                <row><entry>138</entry><entry>还有其他仙盟成员,不能解散仙盟</entry></row>
+                <row><entry>139</entry><entry>该玩家不是本仙盟的成员</entry></row>
+                <row><entry>140</entry><entry>未找到免费兑换的ID</entry></row>
+                <row><entry>141</entry><entry>当前没有限时神将活动</entry></row>
+                <row><entry>142</entry><entry>限时神将免费抽卡的时间没到</entry></row>
+                <row><entry>143</entry><entry>图鉴中的奖励已领取</entry></row>
+                <row><entry>144</entry><entry>好感度等级已经是最高等级</entry></row>
+                <row><entry>145</entry><entry>缺少好感度道具</entry></row>
+                <row><entry>146</entry><entry>活动已结束, 奖励已发放到领奖中心</entry></row>
+                <row><entry>147</entry><entry>玩家没有仙盟</entry></row>
+                <row><entry>148</entry><entry>已经是最高等级了</entry></row>
+                <row><entry>149</entry><entry>今日留言次数已用尽</entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry>151</entry><entry>兑换码兑换失败</entry></row>
+                <row><entry>152</entry><entry>兑换码不存在</entry></row>
+                <row><entry>153</entry><entry>兑换码已使用</entry></row>
+                <row><entry>154</entry><entry>兑换码已过期</entry></row>
+                <row><entry>155</entry><entry>批次号已使用</entry></row>
+                <row><entry>156</entry><entry>兑换码不能在这个游戏服务器上使用</entry></row>
+                <row><entry>157</entry><entry>兑换码不能在这个混服渠道上使用</entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry>161</entry><entry>今日已完成大殿建设</entry></row>
+                <row><entry>162</entry><entry>仙盟女蜗宫-贡献拜祭总次数不足</entry></row>
+                <row><entry>163</entry><entry>仙盟女蜗宫-个人贡献可拜祭次数不足</entry></row>
+                <row><entry>164</entry><entry>仙盟女蜗宫-个人钻石拜祭次数不足</entry></row>
+                <row><entry>165</entry><entry>仙盟总贡献度不足</entry></row>
+                <row><entry>166</entry><entry>个人可用贡献度不足</entry></row>
+                <row><entry>167</entry><entry>仙盟商店-道具可兑换次数不足</entry></row>
+                <row><entry>168</entry><entry>只能兑换一次</entry></row>
+                <row><entry>169</entry><entry>数据不同步, 请刷新道具商店</entry></row>
+                <row><entry>170</entry><entry>仙盟等级不满足条件</entry></row>
+                <row><entry>171</entry><entry>未知入会申请</entry></row>
+                <row><entry>172</entry><entry>仙盟任命前后玩家职位无变化</entry></row>
+                <row><entry>173</entry><entry>提示自己已经在仙盟中了</entry></row>
+                <row><entry>174</entry><entry>只有仙盟盟主才能进行此操作</entry></row>
+                <row><entry>175</entry><entry>职位为副盟主或盟主才能进行此操作</entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry>181</entry><entry>每日任务积分不足, 不能领取奖励</entry></row>
+                <row><entry>182</entry><entry>未知每日任务ID</entry></row>
+                <row><entry>183</entry><entry>精彩活动  该活动已关闭</entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry>190</entry><entry>魔主回来了 不在活动时间段内</entry></row>
+                <row><entry>191</entry><entry>魔主回来了 CD时间未到</entry></row>
+                <row><entry>192</entry><entry>魔主回来了 已到达最大鼓舞等级</entry></row>
+                <row><entry>193</entry><entry>魔主回来了 无此鼓舞等级配置</entry></row>
+                <row><entry>194</entry><entry>魔主回来了 魔主已死</entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry>201</entry><entry>大乱斗 活动已结束，下周一再加油吧</entry></row>
+                <row><entry>202</entry><entry>大乱斗 只有8:00-23:00可以进行比拼</entry></row>
+                <row><entry>203</entry><entry>大乱斗 今日挑战次数已用完，请购买或等待明天</entry></row>
+                <row><entry>204</entry><entry>大乱斗 今天购买次数已经用完</entry></row>
+                <row><entry>205</entry><entry>大乱斗 兑换次数已用完</entry></row>
+                <row><entry>206</entry><entry>免费挑战剩余次数大于0时不能购买</entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry>211</entry><entry>新年红包 今天的红包已领取</entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry>220</entry><entry>伙伴一键转化 玩家没有满足转化条件的伙伴</entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry>230</entry><entry>物品没有出售价格, 不能出售</entry></row>
+                <row><entry>231</entry><entry>该背包的物品不能出售</entry></row>
+                <row><entry>232</entry><entry>皇陵探宝钻石挖宝次数达到最大上限或钻石不足</entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry>241</entry><entry>需要主角50级或VIP5级才可使用</entry></row>
+                <row><entry>242</entry><entry>你的鉴玉等级不需要提升</entry></row>
+                <row><entry>243</entry><entry>未知玉魄</entry></row>
+                <row><entry>244</entry><entry>玉魄背包容量不足</entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry>246</entry><entry>今日的幸运次数已使用</entry></row>
+                <row><entry>247</entry><entry>未知转盘档位</entry></row>
+                <row><entry>248</entry><entry>充值金额不足, 无法抽奖</entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry>250</entry><entry>限时商店 所有组都已关闭</entry></row>
+                <row><entry>251</entry><entry>限时商店 当前组没有开始</entry></row>
+                <row><entry>252</entry><entry>限时商店 不能购买,已达购买上限</entry></row>
+                <row><entry>253</entry><entry>限时商店 无此商品</entry></row>
+                <row><entry>254</entry><entry>团购购买次数上限</entry></row>
+                <row><entry>255</entry><entry>团购人数不够</entry></row>
+                <row><entry>256</entry><entry>未购买该团购礼包</entry></row>
+                <row><entry>257</entry><entry>团购档次或人数错误</entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry>258</entry><entry>成长计划已经领取过</entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry>261</entry><entry>当前阵营的抽卡次数已达最大次数</entry></row>
+                <row><entry>262</entry><entry>当前的抽卡阵营信息已刷新</entry></row>
+                <row><entry>263</entry><entry>没有月卡奖励可领取</entry></row>
+                <row><entry>264</entry><entry>开服狂欢购买领取类型错误</entry></row>
+                <row><entry>265</entry><entry>开服狂欢已经关闭</entry></row>
+                <row><entry>266</entry><entry>开服狂欢商店物品已经购买</entry></row>
+                <row><entry>267</entry><entry>开服狂欢任务未完成</entry></row>
+                <row><entry>268</entry><entry>开服狂欢任务不存在</entry></row>
+                <row><entry>269</entry><entry>开服狂欢任务id未知</entry></row>
+                <row><entry>270</entry><entry>开服狂欢商店购买数最大</entry></row>
+                <row><entry>272</entry><entry>没有此成就类型</entry></row>
+                <row><entry>273</entry><entry>该成就未完成</entry></row>
+                <row><entry>274</entry><entry>依附成就未完成</entry></row>
+                <row><entry>278</entry><entry>名字被占用</entry></row>
+                <row><entry>279</entry><entry>修改方式错误</entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry>281</entry><entry>神秘商店每日道具/钻石刷新总次数已用完</entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry></entry><entry></entry></row>
+                <row><entry></entry><entry></entry></row>
+            </tbody>
+            </tgroup>
+        </informaltable></para>
+    </section>
+</chapter>

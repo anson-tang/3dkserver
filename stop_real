@@ -1,0 +1,31 @@
+#!/bin/bash
+cd `dirname "$0"`/pid
+
+GATEWAY=gateway.pid
+GAME=game.pid
+CHAR=character.pid
+MESSAGE=message.pid
+ALLIANCE=alliance.pid
+
+
+if [ -e $GATEWAY ]; then
+    kill `cat $GATEWAY`
+    echo "Stopped $GATEWAY"
+fi
+if [ -e $GAME ]; then
+    kill `cat $GAME`
+    echo "Stopped $GAME"
+fi
+sleep 1
+if [ -e $CHAR ]; then
+    kill `cat $CHAR`
+    echo "Stopped $CHAR"
+fi
+if [ -e $MESSAGE ]; then
+    kill `cat $MESSAGE`
+    echo "Stopped $MESSAGE"
+fi
+if [ -e $ALLIANCE ]; then
+    kill `cat $ALLIANCE`
+    echo "Stopped $ALLIANCE"
+fi

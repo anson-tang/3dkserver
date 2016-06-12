@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Version: 0.1
+# Author: Don Li <donne.cn@gmail.com>
+# License: Copyright(c) 2012 Don.Li
+# Summary: 
+
+PID='./pid/adminserver_uwsgi.pid'
+echo "uwsgi --$1 $PID"
+uwsgi --$1 $PID
