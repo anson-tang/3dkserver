@@ -38,12 +38,14 @@ def init(server_name):
     if redis_sock:
         redis_conf = dict(
                 path = redis_sock, 
-                dbid = REDIS['redis_db']
+                dbid = REDIS['redis_db'],
+                password = REDIS['redis_passwd'],
                 )
     else:
         redis_conf = dict(
                 host = REDIS['redis_host'],
                 port = REDIS['redis_port'],
-                dbid = REDIS['redis_db']
+                dbid = REDIS['redis_db'],
+                password = REDIS['redis_passwd'],
                 )
 

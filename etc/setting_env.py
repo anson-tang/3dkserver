@@ -28,7 +28,7 @@ log_path = '/root/workspace/3dkserver/logs/'
 #游戏区DB配置
 DB = {
         'host'         : '127.0.0.1',        #MySQL服务器TCP地址, 最好使用局域网地址，不要开放到外网
-        'port'         : 3306,               #MySQL服务器TCP端口
+        'port'         : 13306,               #MySQL服务器TCP端口
         'user'         : '3dk-server',             #MySQL账号
         'pass'         : '3dk-0#Ser.ver',           #账号的密码
         'db_sysconfig' : '3dk_sysconfigdb',  #系统数值database名称
