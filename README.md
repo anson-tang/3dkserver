@@ -65,5 +65,6 @@ restart server
 
 run a mysql-docker 
 =======================
+GENERATED ROOT PASSWORD: DEk23kSYzNEdsaf]Ab=4jyrARuN
 1) docker run --name common-mysql -p 13306:3306 -v /root/workspace/backup/common-mysql/:/var/lib/mysql -e MYSQL_RANDOM_ROOT_PASSWORD=yes -e MYSQL_ONETIME_PASSWORD=yes -d mysql/mysql-server:5.5
 2) docker run --name common-mysql -p 13306:3306 -v /root/workspace/backup/common-mysql/:/var/lib/mysql -e MYSQL_ROOT_PASSWORD= -d mysql/mysql-server:5.5
