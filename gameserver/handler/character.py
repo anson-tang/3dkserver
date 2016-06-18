@@ -648,7 +648,7 @@ def friend_invite(p, req):
             log.error('Target User has been invited. cid: {0}, target_cid: {1}.'.format( cid, target_cid ))
             defer.returnValue( INVITE_FRIEND_REPEAT )
     
-    yield user.update_achievement_status(20, len(user.friends))
+    yield user.achievement_mgr.update_achievement_status(20, len(user.friends))
     # 发送邮件给target_cid
     ms_send('write_mail', (target_cid, MAIL_PAGE_FRIEND, MAIL_FRIEND_1, [cid, user.lead_id, user.nick_name, 1, content]))
 

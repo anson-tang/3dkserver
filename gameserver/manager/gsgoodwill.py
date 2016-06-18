@@ -198,7 +198,7 @@ class GSGoodwillMgr(object):
         self.last_fellow_id = fellow_id
  
         yield self.user.daily_quest_mgr.update_daily_quest( DAILY_QUEST_ID_13, 1)
-        yield self.user.update_achievement_status(23, self.total_goodwill_level)
+        yield self.user.achievement_mgr.update_achievement_status(23, self.total_goodwill_level)
         defer.returnValue( (self.total_goodwill_level, cur_goodwill_exp, cur_goodwill_level, get_goodwill, crit_count, levelup_count, items_return) )
 
     def cal_level_up(self, total_exp, cur_level, levelup_count):
