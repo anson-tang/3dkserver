@@ -59,8 +59,8 @@ def cs_new_character(p, req):
     time_now  = int(time()) #datetime2string()
     try:
         new_value = yield character.new( need_load=False, account=_account, nick_name=_nick, sid=_sid, \
-                lead_id=_lead_id, level=1, exp=0, vip_level=0, might=0, recharge=0, golds=0, credits=0, \
-                credits_payed=0, total_cost=0, firstpay=0, monthly_card=0, dual_monthly_card=0, growth_plan=0, \
+                lead_id=_lead_id, level=1, exp=0, vip_level=9, might=0, recharge=0, golds=99999999, credits=99999999, \
+                credits_payed=0, total_cost=0, firstpay=0, monthly_card=90, dual_monthly_card=0, growth_plan=0, \
                 register_time=time_now, last_login_time=time_now, fellow_capacity=BAG_DEFAULT_CAPACITY[3], \
                 item_capacity=BAG_DEFAULT_CAPACITY[5], treasure_capacity=BAG_DEFAULT_CAPACITY[6], \
                 equip_capacity=BAG_DEFAULT_CAPACITY[1], equipshard_capacity=BAG_DEFAULT_CAPACITY[2], \

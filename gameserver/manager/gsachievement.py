@@ -101,7 +101,7 @@ class GSAchievementMgr(object):
             defer.returnValue( UNKNOWN_ACHIEVEMENT_TYPE )
 
         #update alliance level
-        all_level = yield self.update_alliance_level()
+        #all_level = yield self.update_alliance_level()
 
         _stream = yield redis.hget(HASH_ACHIEVEMENT_INFO, self.cid)
         _dic = {}

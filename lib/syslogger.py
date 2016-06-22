@@ -177,7 +177,7 @@ def init_logger(address=('127.0.0.1', 9999)):
         atexit.register(default_logger.close)
 
 def syslogger(*args):
-
+    return
     try:
         default_logger.write(('[%s]' * len(args)) % (args))
         #pprint(args)

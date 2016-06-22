@@ -12,6 +12,7 @@ if [ -e $GATEWAY ]; then
     kill `cat $GATEWAY`
     echo "Stopped $GATEWAY"
 fi
+sleep 1
 if [ -e $GAME ]; then
     kill `cat $GAME`
     echo "Stopped $GAME"
@@ -21,10 +22,12 @@ if [ -e $CHAR ]; then
     kill `cat $CHAR`
     echo "Stopped $CHAR"
 fi
+sleep 1
 if [ -e $MESSAGE ]; then
     kill `cat $MESSAGE`
     echo "Stopped $MESSAGE"
 fi
+sleep 1
 if [ -e $ALLIANCE ]; then
     kill `cat $ALLIANCE`
     echo "Stopped $ALLIANCE"
